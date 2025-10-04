@@ -1,0 +1,36 @@
+{
+  "expo": {
+    "name": "learn-everything-expo",
+    "slug": "learn-everything-expo",
+    "version": "1.0.0",
+    "orientation": "default",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "scheme": "learneverythingexpo",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.learneverythingexpo"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.learneverythingexpo"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-asset",
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#ffffff",
+          "image": "./assets/splash-icon.png"
+        }
+      ]
+    ]
+  }
+}
