@@ -9,8 +9,8 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function Onboarding() {
     return (
-        <View>
-            <Text>Onboarding</Text>
+        <View className="flex-1 items-center justify-center">
+            <Text className="text-5xl font-bold text-amber-500">Onboarding</Text>
         </View>
     );
 }
