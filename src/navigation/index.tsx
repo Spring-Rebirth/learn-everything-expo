@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Onboarding from './screens/get-started/Onboarding';
 import { StatusBar } from 'expo-status-bar';
 
-type RootStackParamList = {
+export type RootStackParamList = {
   Onboarding: undefined;
 };
 
