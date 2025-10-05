@@ -1,23 +1,23 @@
 import { View, Text, Pressable, Image } from 'react-native'
 import Animated, { FadeInDown } from 'react-native-reanimated'
-import { Item } from '../../screens/root-tabs/Home'
-import FontAwesome6 from '@react-native-vector-icons/fontawesome6';
+import { Item } from '../../navigation/screens/root-tabs/Home'
+import { FontAwesome6 } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../../navigation/RootStack';
+import { RootBottomTabsParamList } from '../../navigation/RootBottomTabs';
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
 export default function ListItem({ item, index }: { item: Item, index: number }) {
-    const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+    const navigation = useNavigation<NativeStackNavigationProp<RootBottomTabsParamList>>();
 
     return (
         <AnimatedPressable
             testID='home-item-pressable'
-            onPress={() => navigation.navigate('HomeEntryStack', {
-                screen: 'Detail',
-                params: { itemId: item.id, title: item.title, image: item.image }
-            })}
+            // onPress={() => navigation.navigate('HomeEntryStack', {
+            //     screen: 'Detail',
+            //     params: { itemId: item.id, title: item.title, image: item.image }
+            // })}
             entering={FadeInDown.delay(index * 200)}
         >
             <View
@@ -41,7 +41,7 @@ export default function ListItem({ item, index }: { item: Item, index: number })
                                 name='image'
                                 size={20}
                                 color='#667eea'
-                                iconStyle='solid'
+                                solid
                             />
                         </View>
                         <View className='flex-1'>
@@ -49,7 +49,7 @@ export default function ListItem({ item, index }: { item: Item, index: number })
                             <Text className='text-sm text-gray-600 mt-1'>{item.description}</Text>
                         </View>
                     </View>
-                    <FontAwesome6 name='chevron-right' size={16} color='#C7C7CC' iconStyle='solid' />
+                    <FontAwesome6 name='chevron-right' size={16} color='#C7C7CC' solid />
                 </View>
 
                 {/* Card Image */}
@@ -75,11 +75,11 @@ export default function ListItem({ item, index }: { item: Item, index: number })
                 {/* Card Footer */}
                 <View className='flex-row items-center justify-between p-4'>
                     <View className='flex-row items-center'>
-                        <FontAwesome6 name='star' size={14} color='#6B7280' iconStyle='solid' />
+                        <FontAwesome6 name='star' size={14} color='#6B7280' solid />
                         <Text className='text-xs text-gray-600 ml-2'>Lable placeholder</Text>
                     </View>
                     <View className='flex-row items-center'>
-                        <FontAwesome6 name='clock' size={14} color='#6B7280' iconStyle='solid' />
+                        <FontAwesome6 name='clock' size={14} color='#6B7280' solid />
                         <Text className='text-xs text-gray-600 ml-1'>Just now</Text>
                     </View>
                 </View>

@@ -44,7 +44,9 @@ export default function Onboarding() {
                 style={{ marginBottom: insets.bottom }}
                 onPress={() => {
                     if (currentPage === 2) {
-                        // TODO: Add logic to navigate to home
+                        navigation.navigate('RootBottomTabs', {
+                            screen: 'Home',
+                        });
                     } else {
                         pagerRef.current?.setPage(currentPage + 1);
                     }
