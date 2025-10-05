@@ -8,12 +8,20 @@ import { useNavigation, NavigationProp } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function Onboarding() {
-    const [currentPage, setCurrentPage] = useState(1);
-
+    const [currentPage, setCurrentPage] = useState(0);
 
     return (
-        <View className="flex-1 items-center justify-center">
-            <Text className="text-5xl font-bold text-amber-500">Onboarding</Text>
+        <View className="flex-1">
+            <PagerView
+                style={{ flex: 1 }}
+                initialPage={currentPage}
+                onPageSelected={(e) => setCurrentPage(e.nativeEvent.position)}
+            >
+                <Onboarding1 key="1" />
+                <Onboarding2 key="2" />
+                <Onboarding3 key="3" />
+            </PagerView>
+
         </View>
     );
 }
