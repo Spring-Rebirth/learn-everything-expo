@@ -8,6 +8,9 @@ import { useNavigation, NavigationProp } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function Onboarding() {
+    const [currentPage, setCurrentPage] = useState(1);
+
+
     return (
         <View className="flex-1 items-center justify-center">
             <Text className="text-5xl font-bold text-amber-500">Onboarding</Text>
