@@ -2,28 +2,28 @@ import { Pressable, ScrollView, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { RootBottomTabsParamList } from "../../RootBottomTabs";
+import { RootStackParamList } from "../../../navigation";
+import { PlaygroundEntryStackParamList } from "../../PlaygroundEntryStack";
 
 type PageItem = {
     id: string;
     name: string;
-    // destination: keyof PlaygroundEntryStackParamList;
-    destination: string;
+    destination: keyof PlaygroundEntryStackParamList;
 };
 
 export default function Playground() {
-    const navigation = useNavigation<NativeStackNavigationProp<RootBottomTabsParamList>>();
+    const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
     const pageList: PageItem[] = [
-        {
-            id: '0',
-            name: '手动手势',
-            destination: 'ManualGestures'
-        },
-        {
-            id: '1',
-            name: '网格拖拽排序',
-            destination: 'DraggableSortingGrid'
-        },
+        // {
+        //     id: '0',
+        //     name: '手动手势',
+        //     destination: 'ManualGestures'
+        // },
+        // {
+        //     id: '1',
+        //     name: '网格拖拽排序',
+        //     destination: 'DraggableSortingGrid'
+        // },
         {
             id: '2',
             name: 'Shared Bounds 过渡示例',
@@ -37,7 +37,9 @@ export default function Playground() {
                 {pageList.map((page) => (
                     <Pressable
                         key={page.id}
-                        onPress={() => console.log("button pressed")}
+                        onPress={() => navigation.navigate('PlaygroundEntryStack', {
+                            screen: page.destination
+                        })}
                         className="bg-blue-500 rounded-lg p-4 m-2 shadow-md items-center mb-4"
                     >
                         <Text className="text-white font-bold text-lg">{page.name}</Text>
