@@ -29,6 +29,11 @@ export default function Playground() {
             name: 'Shared Bounds 过渡示例',
             destination: 'SharedBoundsList'
         },
+        {
+            id: '3',
+            name: 'Image Control Actions',
+            destination: 'ImageControlActions'
+        }
     ];
 
     return (

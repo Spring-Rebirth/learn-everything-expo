@@ -2,6 +2,7 @@ import { createNativeStackNavigator } from "react-native-screen-transitions";
 import Transition from "react-native-screen-transitions";
 import SharedBoundsList from "./screens/playground-entry-stack/SharedBoundsList";
 import SharedBoundsDetail from "./screens/playground-entry-stack/SharedBoundsDetail";
+import ImageControlActions from "./screens/playground-entry-stack/ImageControlActions";
 import { TouchableOpacity } from "react-native";
 import { FontAwesome6 } from '@expo/vector-icons';
 import { View } from "react-native";
@@ -11,6 +12,7 @@ export type PlaygroundEntryStackParamList = {
     // DraggableSortingGrid: undefined;
     SharedBoundsList: undefined;
     SharedBoundsDetail: { id: string };
+    ImageControlActions: undefined;
 };
 
 const Stack = createNativeStackNavigator<PlaygroundEntryStackParamList>();
@@ -72,6 +74,13 @@ export default function PlaygroundEntryStack() {
                             overshootClamping: true,
                         },
                     },
+                }}
+            />
+            <Stack.Screen
+                name="ImageControlActions"
+                component={ImageControlActions}
+                options={{
+                    headerShown: false,
                 }}
             />
         </Stack.Navigator>
