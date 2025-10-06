@@ -1522,7 +1522,7 @@ PODS:
     - React-RCTFBReactNativeSpec
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
-  - react-native-keyboard-controller (1.18.5):
+  - react-native-keyboard-controller (1.19.0):
     - hermes-engine
     - RCTRequired
     - RCTTypeSafety
@@ -1534,7 +1534,7 @@ PODS:
     - React-graphics
     - React-ImageManager
     - React-jsi
-    - react-native-keyboard-controller/common (= 1.18.5)
+    - react-native-keyboard-controller/common (= 1.19.0)
     - React-NativeModulesApple
     - React-RCTFabric
     - React-renderercss
@@ -1545,7 +1545,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
     - Yoga
-  - react-native-keyboard-controller/common (1.18.5):
+  - react-native-keyboard-controller/common (1.19.0):
     - hermes-engine
     - RCTRequired
     - RCTTypeSafety
@@ -2218,7 +2218,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
     - Yoga
-  - RNWorklets (0.5.1):
+  - RNWorklets (0.6.0):
     - hermes-engine
     - RCTRequired
     - RCTTypeSafety
@@ -2240,9 +2240,9 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
-    - RNWorklets/worklets (= 0.5.1)
+    - RNWorklets/worklets (= 0.6.0)
     - Yoga
-  - RNWorklets/worklets (0.5.1):
+  - RNWorklets/worklets (0.6.0):
     - hermes-engine
     - RCTRequired
     - RCTTypeSafety
@@ -2264,9 +2264,9 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
-    - RNWorklets/worklets/apple (= 0.5.1)
+    - RNWorklets/worklets/apple (= 0.6.0)
     - Yoga
-  - RNWorklets/worklets/apple (0.5.1):
+  - RNWorklets/worklets/apple (0.6.0):
     - hermes-engine
     - RCTRequired
     - RCTTypeSafety
@@ -2629,7 +2629,7 @@ SPEC CHECKSUMS:
   React-logger: 472e292c035c024ac73070cd6cbd011a827136f9
   React-Mapbuffer: 823a2c0e0d1826c784f808174626d5229f59be17
   React-microtasksnativemodule: 70cdf4826e52c7bcf98bc55255c3e30b5455d318
-  react-native-keyboard-controller: 5587bad7f102125e2020720c4e37e0b58ff5e52e
+  react-native-keyboard-controller: 83fcc872215bffe57b84983b0f0c2e837995b037
   react-native-pager-view: e37989fc447aa4b5de6d0d2ffb0229e817329246
   react-native-safe-area-context: add9b4ba236fe95ec600604d0fc72f395433dd59
   React-NativeModulesApple: e653919faff1f76eadf02373bda26c085bf348e3
@@ -2668,7 +2668,7 @@ SPEC CHECKSUMS:
   RNReanimated: fe39bddb3d2d02e38f171bf4b3c6eea787ed90a7
   RNScreens: dd61bc3a3e6f6901ad833efa411917d44827cf51
   RNSVG: 2825ee146e0f6a16221e852299943e4cceef4528
-  RNWorklets: 28ee7370ca8da356fcc914e3e68b97e9752196d2
+  RNWorklets: 87e1a6b5f88d19f3c34be25f82b37c4344b8657c
   Yoga: 051f086b5ccf465ff2ed38a2cf5a558ae01aaaa1
 
 PODFILE CHECKSUM: d1553dd4723fb6d5e628e6e3b99a68f576f8a10e
