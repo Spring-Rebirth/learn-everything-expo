@@ -10,7 +10,8 @@
     "scheme": "learneverythingexpo",
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.learneverythingexpo"
+      "bundleIdentifier": "com.learneverythingexpo",
+      "appleTeamId": "XFLX2PQSF5"
     },
     "android": {
       "adaptiveIcon": {
