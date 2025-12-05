@@ -1,5 +1,4 @@
-import { createNativeStackNavigator } from "react-native-screen-transitions";
-import Transition from "react-native-screen-transitions";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import SharedBoundsList from "./screens/playground-entry-stack/SharedBoundsList";
 import SharedBoundsDetail from "./screens/playground-entry-stack/SharedBoundsDetail";
 import ImageControlActions from "./screens/playground-entry-stack/ImageControlActions";
@@ -57,23 +56,6 @@ export default function PlaygroundEntryStack() {
                 component={SharedBoundsDetail}
                 options={{
                     headerShown: false,
-                    enableTransitions: true,
-                    ...Transition.presets.SharedAppleMusic(),
-                    // 使用更短时长的 Spring 配置以减少触摸阻塞感知时间
-                    transitionSpec: {
-                        open: {
-                            stiffness: 1200,
-                            damping: 260,
-                            mass: 1.2,
-                            overshootClamping: true,
-                        },
-                        close: {
-                            stiffness: 1200,
-                            damping: 180,
-                            mass: 1.2,
-                            overshootClamping: true,
-                        },
-                    },
                 }}
             />
             <Stack.Screen
