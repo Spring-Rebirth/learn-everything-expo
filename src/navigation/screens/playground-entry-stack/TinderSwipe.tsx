@@ -7,11 +7,10 @@ import Animated, {
     useSharedValue,
     withSpring,
     interpolate,
-    Extrapolate,
     withTiming,
     Easing,
     SharedValue,
-    runOnJS,
+    Extrapolation,
 } from 'react-native-reanimated';
 import { scheduleOnRN } from 'react-native-worklets';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -107,7 +106,7 @@ const SwipeableCard = ({
             currentTranslateX,
             [-SCREEN_WIDTH / 2, 0, SCREEN_WIDTH / 2],
             [-15, 0, 15],
-            Extrapolate.CLAMP
+            Extrapolation.CLAMP
         );
 
         // 缩放逻辑：
@@ -119,7 +118,7 @@ const SwipeableCard = ({
                 Math.abs(otherTranslation.value),
                 [0, SWIPE_THRESHOLD * 2],
                 [0.95, 1], // 从 0.95 放大到 1
-                Extrapolate.CLAMP
+                Extrapolation.CLAMP
             );
         } else if (!isTop) {
             // 更后面的卡片
@@ -139,11 +138,11 @@ const SwipeableCard = ({
     });
 
     const likeStyle = useAnimatedStyle(() => ({
-        opacity: isTop ? interpolate(activeTranslation.value, [0, SCREEN_WIDTH / 4], [0, 1], Extrapolate.CLAMP) : 0
+        opacity: isTop ? interpolate(activeTranslation.value, [0, SCREEN_WIDTH / 4], [0, 1], Extrapolation.CLAMP) : 0
     }));
 
     const nopeStyle = useAnimatedStyle(() => ({
-        opacity: isTop ? interpolate(activeTranslation.value, [-SCREEN_WIDTH / 4, 0], [1, 0], Extrapolate.CLAMP) : 0
+        opacity: isTop ? interpolate(activeTranslation.value, [-SCREEN_WIDTH / 4, 0], [1, 0], Extrapolation.CLAMP) : 0
     }));
 
     if (!card) return null;

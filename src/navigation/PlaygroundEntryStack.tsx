@@ -3,6 +3,7 @@ import SharedBoundsList from "./screens/playground-entry-stack/SharedBoundsList"
 import SharedBoundsDetail from "./screens/playground-entry-stack/SharedBoundsDetail";
 import ImageControlActions from "./screens/playground-entry-stack/ImageControlActions";
 import TinderSwipe from "./screens/playground-entry-stack/TinderSwipe";
+import ParallaxProfile from "./screens/playground-entry-stack/ParallaxProfile";
 import { TouchableOpacity } from "react-native";
 import { FontAwesome6 } from '@expo/vector-icons';
 import { View } from "react-native";
@@ -14,6 +15,7 @@ export type PlaygroundEntryStackParamList = {
     SharedBoundsDetail: { id: string };
     ImageControlActions: undefined;
     TinderSwipe: undefined;
+    ParallaxProfile: undefined;
 };
 
 const Stack = createNativeStackNavigator<PlaygroundEntryStackParamList>();
@@ -76,6 +78,13 @@ export default function PlaygroundEntryStack() {
                         <BackButton navigation={navigation} />
                     ),
                 })}
+            />
+            <Stack.Screen
+                name="ParallaxProfile"
+                component={ParallaxProfile}
+                options={{
+                    headerShown: false,
+                }}
             />
         </Stack.Navigator>
     );

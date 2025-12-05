@@ -38,6 +38,11 @@ export default function Playground() {
             id: 'task-1',
             name: 'Tinder 卡片滑动 (Deck Swiper)',
             destination: 'TinderSwipe'
+        },
+        {
+            id: 'task-2',
+            name: '视差滚动主页 (Parallax)',
+            destination: 'ParallaxProfile'
         }
     ];
 
