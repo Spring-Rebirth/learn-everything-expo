@@ -33,6 +33,11 @@ export default function Playground() {
             id: '3',
             name: 'Image Control Actions',
             destination: 'ImageControlActions'
+        },
+        {
+            id: 'task-1',
+            name: 'Tinder 卡片滑动 (Deck Swiper)',
+            destination: 'TinderSwipe'
         }
     ];
 

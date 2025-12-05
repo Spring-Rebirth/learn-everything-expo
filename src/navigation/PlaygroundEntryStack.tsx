@@ -2,6 +2,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import SharedBoundsList from "./screens/playground-entry-stack/SharedBoundsList";
 import SharedBoundsDetail from "./screens/playground-entry-stack/SharedBoundsDetail";
 import ImageControlActions from "./screens/playground-entry-stack/ImageControlActions";
+import TinderSwipe from "./screens/playground-entry-stack/TinderSwipe";
 import { TouchableOpacity } from "react-native";
 import { FontAwesome6 } from '@expo/vector-icons';
 import { View } from "react-native";
@@ -12,6 +13,7 @@ export type PlaygroundEntryStackParamList = {
     SharedBoundsList: undefined;
     SharedBoundsDetail: { id: string };
     ImageControlActions: undefined;
+    TinderSwipe: undefined;
 };
 
 const Stack = createNativeStackNavigator<PlaygroundEntryStackParamList>();
@@ -64,6 +66,16 @@ export default function PlaygroundEntryStack() {
                 options={{
                     headerShown: false,
                 }}
+            />
+            <Stack.Screen
+                name="TinderSwipe"
+                component={TinderSwipe}
+                options={({ navigation }) => ({
+                    headerTitle: 'Tinder Swipe',
+                    headerLeft: () => (
+                        <BackButton navigation={navigation} />
+                    ),
+                })}
             />
         </Stack.Navigator>
     );
