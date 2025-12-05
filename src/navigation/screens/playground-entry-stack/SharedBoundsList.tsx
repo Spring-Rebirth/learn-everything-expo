@@ -1,19 +1,29 @@
-import { View, Text, Image, Pressable } from "react-native";
+import { View, Image, Pressable, Dimensions } from "react-native";
 import { imageAssets } from "../../../constant/imageAssets";
-import Animated from "react-native-reanimated";
+import Animated, { SharedTransition } from "react-native-reanimated";
 
 const items = [
-    { id: 'a', title: 'Green Lake', image: imageAssets.nature1 },
-    { id: 'b', title: 'Blue Sky', image: imageAssets.nature2 },
-    { id: 'c', title: 'Flame Mountain', image: imageAssets.nature3 },
-    { id: 'd', title: 'Green Lake', image: imageAssets.nature1 },
-    { id: 'e', title: 'Blue Sky', image: imageAssets.nature2 },
-    { id: 'f', title: 'Flame Mountain', image: imageAssets.nature3 },
+    { id: 'a', image: imageAssets.nature1 },
+    { id: 'b', image: imageAssets.nature2 },
+    { id: 'c', image: imageAssets.nature3 },
+    { id: 'd', image: imageAssets.nature1 },
+    { id: 'e', image: imageAssets.nature2 },
+    { id: 'f', image: imageAssets.nature3 },
 ];
 
 const AnimatedImage = Animated.createAnimatedComponent(Image);
+const { width: SCREEN_WIDTH } = Dimensions.get('window');
+
+// 图片使用弹性过渡动画
+const imageTransition = SharedTransition
+    .springify()
+    .damping(18)
+    .stiffness(120)
+    .mass(0.8);
 
 export default function SharedBoundsList({ navigation }: any) {
+    const listImageWidth = SCREEN_WIDTH - 32; // px-4 = 16px * 2
+    const listImageHeight = 192; // h-48 = 192px
 
     return (
         <View className="bg-slate-50 flex-1 px-4">
@@ -30,7 +40,6 @@ export default function SharedBoundsList({ navigation }: any) {
                             { id: item.id },
                         )}
                         style={({ pressed }) => ({
-                            backgroundColor: '#fff',
                             borderRadius: 16,
                             overflow: 'hidden',
                             marginBottom: 16,
@@ -44,25 +53,15 @@ export default function SharedBoundsList({ navigation }: any) {
                     >
                         <AnimatedImage
                             sharedTransitionTag={`image-${item.id}`}
+                            sharedTransitionStyle={imageTransition}
                             source={item.image}
-                            className="w-full h-48"
+                            style={{
+                                width: listImageWidth,
+                                height: listImageHeight,
+                                borderRadius: 16,
+                            }}
                             resizeMode="cover"
                         />
-                        <Animated.View
-                            sharedTransitionTag={`title-${item.id}`}
-                            style={{
-                                paddingHorizontal: 16,
-                                paddingVertical: 8,
-                                backgroundColor: 'white',
-                            }}
-                        >
-                            <Text className="text-lg font-bold text-gray-900">
-                                {item.title}
-                            </Text>
-                        </Animated.View>
-                        <Text className="text-sm text-gray-600 px-4 pb-4">
-                            Tap to view details
-                        </Text>
                     </Pressable>
                 ))}
             </Animated.ScrollView>

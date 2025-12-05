@@ -1,5 +1,5 @@
 import { View, Text, Image, Pressable, Dimensions } from "react-native";
-import Animated, { FadeIn } from "react-native-reanimated";
+import Animated, { FadeIn, SharedTransition } from "react-native-reanimated";
 import { imageAssets } from "../../../constant/imageAssets";
 
 const imagesMap: Record<string, any> = {
@@ -12,74 +12,56 @@ const imagesMap: Record<string, any> = {
 };
 
 const AnimatedImage = Animated.createAnimatedComponent(Image);
+const { width: SCREEN_WIDTH } = Dimensions.get('window');
+
+// 图片使用弹性过渡动画（与列表页保持一致）
+const imageTransition = SharedTransition
+    .springify()
+    .damping(18)
+    .stiffness(120)
+    .mass(0.8);
 
 export default function SharedBoundsDetail({ route, navigation }: any) {
     const { id } = route.params;
     const image = imagesMap[id] ?? imageAssets.nature1;
-    let title;
-
-    switch (id) {
-        case 'a':
-            title = 'Green Lake';
-            break;
-        case 'b':
-            title = 'Blue Sky';
-            break;
-        case 'c':
-            title = 'Flame Mountain';
-            break;
-        case 'd':
-            title = 'Green Lake';
-            break;
-        case 'e':
-            title = 'Blue Sky';
-            break;
-        default:
-            title = 'Flame Mountain';
-    }
-
-    const { width } = Dimensions.get('window');
+    const detailImageHeight = SCREEN_WIDTH * 0.66;
 
     return (
         <View style={{ flex: 1, backgroundColor: 'white' }}>
-            <View className="relative">
+            <View style={{ position: 'relative' }}>
                 <AnimatedImage
                     sharedTransitionTag={`image-${id}`}
+                    sharedTransitionStyle={imageTransition}
                     source={image}
-                    style={{ width, height: width * 0.66 }}
+                    style={{
+                        width: SCREEN_WIDTH,
+                        height: detailImageHeight,
+                    }}
                     resizeMode="cover"
                 />
-                <Pressable
-                    className="absolute top-14 left-4 bg-black/40 px-3 py-2 rounded-full z-10"
-                    onPress={() => navigation.goBack()}
-                >
-                    <Text className="text-white font-medium">Back</Text>
-                </Pressable>
-            </View>
-
-            <View className="p-4">
                 <Animated.View
-                    sharedTransitionTag={`title-${id}`}
+                    entering={FadeIn.delay(250).duration(300)}
                     style={{
-                        alignSelf: 'flex-start', // 防止宽度自动撑满，影响过渡定位
-                        backgroundColor: 'white',
-                        marginBottom: 12
+                        position: 'absolute',
+                        top: 56,
+                        left: 16,
+                        zIndex: 10,
                     }}
                 >
-                    <Text className="text-2xl font-bold text-gray-900">
-                        {title}
-                    </Text>
+                    <Pressable
+                        style={{
+                            backgroundColor: 'rgba(0,0,0,0.4)',
+                            paddingHorizontal: 12,
+                            paddingVertical: 8,
+                            borderRadius: 9999,
+                        }}
+                        onPress={() => navigation.goBack()}
+                    >
+                        <Text style={{ color: 'white', fontWeight: '500' }}>Back</Text>
+                    </Pressable>
                 </Animated.View>
-
-                <Animated.Text
-                    entering={FadeIn.delay(200).duration(500)}
-                    className="text-gray-600 leading-6"
-                >
-                    This is a demo detail screen that uses measure-driven bounds transitions.
-                    The image and title are measured on the list screen and then animated to
-                    their new positions here.
-                </Animated.Text>
             </View>
+
         </View>
     );
 }
