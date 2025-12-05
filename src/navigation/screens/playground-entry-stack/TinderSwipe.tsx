@@ -65,14 +65,11 @@ const SwipeableCard = ({
     const translateY = useSharedValue(0);
 
     useEffect(() => {
-        // 当卡片重置时，强制归零。
-        // 注意：这里我们直接修改传入的 activeTranslation.value
-        // 这在逻辑上是对的，因为该 Slot 现在处于底层等待复用。
-        if (index > currentIndex) {
-            activeTranslation.value = 0;
-            translateY.value = 0;
-        }
-    }, [card.id, index, currentIndex]); // 依赖项调整
+        // 当数据源(card.id)发生变化时，说明Slot被分配了新的卡片，必须重置位置。
+        // 无论是Reset还是正常轮播到下一张，只要ID变了，都需要归零。
+        activeTranslation.value = 0;
+        translateY.value = 0;
+    }, [card.id]); // 依赖项调整
 
     const isTop = index === currentIndex;
     const isNext = index === currentIndex + 1;
