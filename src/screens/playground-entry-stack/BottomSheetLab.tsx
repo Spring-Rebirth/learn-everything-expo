@@ -1,21 +1,49 @@
 import { Dimensions, Pressable, Text, View } from 'react-native';
-import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
+import Animated, { useAnimatedReaction, useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import { useMemo } from 'react';
 import { useThemeContext } from '../../providers/ThemeProvider';
 
 const { height } = Dimensions.get('window');
-const SNAP_POINTS = [80, height * 0.4, height * 0.7];
+// 三个吸附点，单位为向下的位移，超出面板高度会被动态收敛
+const SNAP_POINTS = [80, height * 0.35, height * 0.7];
 
-const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max);
+const clamp = (value: number, min: number, max: number) => {
+  'worklet';
+  return Math.min(Math.max(value, min), max);
+};
 
 export default function BottomSheetLab() {
   const { isDark } = useThemeContext();
   const translateY = useSharedValue(SNAP_POINTS[1]);
   const startY = useSharedValue(SNAP_POINTS[1]);
+  const sheetHeight = useSharedValue(0);
+
+  const getClamped = (value: number) => {
+    'worklet';
+    const maxTranslate = sheetHeight.value > 0 ? Math.min(SNAP_POINTS[2], sheetHeight.value - 32) : SNAP_POINTS[2];
+    return clamp(value, SNAP_POINTS[0], maxTranslate);
+  };
+
+  useAnimatedReaction(
+    () => sheetHeight.value,
+    (h) => {
+      if (!h) return;
+      const maxTranslate = Math.min(SNAP_POINTS[2], h - 32);
+      if (translateY.value > maxTranslate) {
+        translateY.value = withSpring(maxTranslate, {
+          damping: 18,
+          stiffness: 200,
+          overshootClamping: true,
+        });
+        startY.value = maxTranslate;
+      }
+    },
+  );
 
   const snapTo = (value: number) => {
-    translateY.value = withSpring(value, {
+    const clamped = getClamped(value);
+    translateY.value = withSpring(clamped, {
       damping: 18,
       stiffness: 200,
       overshootClamping: true,
@@ -29,7 +57,7 @@ export default function BottomSheetLab() {
           startY.value = translateY.value;
         })
         .onUpdate((event) => {
-          translateY.value = clamp(startY.value + event.translationY, SNAP_POINTS[0], SNAP_POINTS[2]);
+          translateY.value = getClamped(startY.value + event.translationY);
         })
         .onEnd((event) => {
           const projected = translateY.value + event.velocityY * 0.1;
@@ -37,7 +65,8 @@ export default function BottomSheetLab() {
           const closest = SNAP_POINTS.reduce((prev, curr) =>
             Math.abs(curr - projected) < Math.abs(prev - projected) ? curr : prev
           );
-          translateY.value = withSpring(closest, { damping: 18, stiffness: 200 });
+          const clamped = getClamped(closest);
+          translateY.value = withSpring(clamped, { damping: 18, stiffness: 200 });
         }),
     [],
   );
@@ -65,6 +94,9 @@ export default function BottomSheetLab() {
       <GestureDetector gesture={pan}>
         <Animated.View
           className="absolute left-0 right-0"
+          onLayout={({ nativeEvent }) => {
+            sheetHeight.value = nativeEvent.layout.height;
+          }}
           style={[
             {
               bottom: 0,
