@@ -1,5 +1,5 @@
 import { View, Text, StatusBar } from 'react-native';
-import { MasonryFlashList } from '@shopify/flash-list';
+import { FlashList } from '@shopify/flash-list';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useMemo } from 'react';
 import { useThemeContext } from '../../providers/ThemeProvider';
@@ -22,9 +22,9 @@ export default function MasonryFlashListLab() {
   const renderItem = ({ item }: { item: Item }) => {
     // TODO: 实现列表项渲染逻辑
     return (
-      <View 
-        style={{ 
-          height: item.height, 
+      <View
+        style={{
+          height: item.height,
           backgroundColor: item.color,
           margin: 4,
           borderRadius: 8
@@ -48,15 +48,13 @@ export default function MasonryFlashListLab() {
         </Text>
       </View>
 
-      {/* 
-        TODO: 完成 MasonryFlashList 配置
-        - data={data}
-        - renderItem={renderItem}
-        - numColumns={2}
-        - estimatedItemSize={200}
-      */}
-      <View className="flex-1 justify-center items-center">
-        <Text style={{ color: isDark ? '#fff' : '#000' }}>在此处实现 MasonryFlashList</Text>
+      <View className="flex-1 w-full">
+        <FlashList
+          data={data}
+          renderItem={renderItem}
+          numColumns={2}
+          {...({ estimatedItemSize: 200 } as any)}
+        />
       </View>
     </View>
   );
