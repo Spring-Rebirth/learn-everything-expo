@@ -33,7 +33,6 @@ interface SortableItemProps {
   item: Item;
   index: number;
   positions: SharedValue<Record<string, number>>;
-  onDragEnd: (from: number, to: number) => void;
 }
 
 function getPosition(index: number) {
@@ -158,7 +157,6 @@ export default function DraggableSortingGrid() {
             item={item}
             index={index}
             positions={positions}
-            onDragEnd={() => { }}
           />
         ))}
       </View>
