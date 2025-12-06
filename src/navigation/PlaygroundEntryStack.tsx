@@ -6,6 +6,9 @@ import TinderSwipe from "../screens/playground-entry-stack/TinderSwipe";
 import ParallaxProfile from "../screens/playground-entry-stack/ParallaxProfile";
 import ManualGestures from "../screens/playground-entry-stack/ManualGestures";
 import DraggableSortingGrid from "../screens/playground-entry-stack/DraggableSortingGrid";
+import NotificationsLab from "../screens/playground-entry-stack/NotificationsLab";
+import CameraLab from "../screens/playground-entry-stack/CameraLab";
+import BottomSheetLab from "../screens/playground-entry-stack/BottomSheetLab";
 import { TouchableOpacity } from "react-native";
 import { FontAwesome6 } from '@expo/vector-icons';
 import { View } from "react-native";
@@ -18,6 +21,9 @@ export type PlaygroundEntryStackParamList = {
   ImageControlActions: undefined;
   TinderSwipe: undefined;
   ParallaxProfile: undefined;
+  NotificationsLab: undefined;
+  CameraLab: undefined;
+  BottomSheetLab: undefined;
 };
 
 const Stack = createNativeStackNavigator<PlaygroundEntryStackParamList>();
@@ -47,6 +53,36 @@ function BackButton({ navigation }: { navigation: any }) {
 export default function PlaygroundEntryStack() {
   return (
     <Stack.Navigator initialRouteName="SharedBoundsList">
+      <Stack.Screen
+        name="NotificationsLab"
+        component={NotificationsLab}
+        options={({ navigation }) => ({
+          headerTitle: '通知实验室',
+          headerLeft: () => (
+            <BackButton navigation={navigation} />
+          ),
+        })}
+      />
+      <Stack.Screen
+        name="CameraLab"
+        component={CameraLab}
+        options={({ navigation }) => ({
+          headerTitle: '相机实验室',
+          headerLeft: () => (
+            <BackButton navigation={navigation} />
+          ),
+        })}
+      />
+      <Stack.Screen
+        name="BottomSheetLab"
+        component={BottomSheetLab}
+        options={({ navigation }) => ({
+          headerTitle: '可拖拽 BottomSheet',
+          headerLeft: () => (
+            <BackButton navigation={navigation} />
+          ),
+        })}
+      />
       <Stack.Screen
         name="ManualGestures"
         component={ManualGestures}

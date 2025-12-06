@@ -15,6 +15,21 @@ export default function Playground() {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const pageList: PageItem[] = [
     {
+      id: 'lab-notif',
+      name: '通知实验室 (Expo Notifications)',
+      destination: 'NotificationsLab'
+    },
+    {
+      id: 'lab-camera',
+      name: '相机实验室 (Expo Camera)',
+      destination: 'CameraLab'
+    },
+    {
+      id: 'lab-bottom-sheet',
+      name: '可拖拽 Bottom Sheet',
+      destination: 'BottomSheetLab'
+    },
+    {
       id: '0',
       name: '手动手势',
       destination: 'ManualGestures'
