@@ -1,10 +1,10 @@
-import { View, Text, Button, Dimensions } from 'react-native';
+import { View, Text, TouchableOpacity, Dimensions } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
-import Animated, { 
-  useAnimatedProps, 
-  useSharedValue, 
-  withTiming, 
-  Easing 
+import Animated, {
+  useAnimatedProps,
+  useSharedValue,
+  withTiming,
+  Easing
 } from 'react-native-reanimated';
 import { useThemeContext } from '../../providers/ThemeProvider';
 
@@ -58,7 +58,12 @@ export default function SvgPathAnimationLab() {
       </View>
 
       <View className="mt-8">
-        <Button title="Trigger Animation" onPress={handleAnimate} />
+        <TouchableOpacity
+          onPress={handleAnimate}
+          className="bg-blue-500 dark:bg-blue-600 py-3 px-6 rounded-xl active:opacity-80"
+        >
+          <Text className="text-white font-bold text-lg">Trigger Animation</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
