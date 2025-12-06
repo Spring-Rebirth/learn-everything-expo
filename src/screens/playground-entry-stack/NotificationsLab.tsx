@@ -9,6 +9,8 @@ Notifications.setNotificationHandler({
     shouldShowAlert: true,
     shouldPlaySound: false,
     shouldSetBadge: false,
+    shouldShowBanner: true,
+    shouldShowList: true,
   }),
 });
 
@@ -54,7 +56,7 @@ export default function NotificationsLab() {
         title: '⏰ 本地通知',
         body: '3 秒后触发的演示通知',
       },
-      trigger: { seconds: 3 },
+      trigger: { type: Notifications.SchedulableTriggerInputTypes.TIME_INTERVAL, seconds: 3, repeats: false },
     });
     setScheduledId(id);
   };
