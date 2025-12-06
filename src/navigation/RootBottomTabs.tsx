@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import HomeScreen from './screens/root-tabs/Home';
-import PlaygroundScreen from './screens/root-tabs/Playground';
-import NoticeScreen from './screens/root-tabs/Notice';
+import HomeScreen from '../screens/root-tabs/Home';
+import PlaygroundScreen from '../screens/root-tabs/Playground';
+import NoticeScreen from '../screens/root-tabs/Notice';
 import { FontAwesome6 } from '@expo/vector-icons';
 
 export type RootBottomTabsParamList = {

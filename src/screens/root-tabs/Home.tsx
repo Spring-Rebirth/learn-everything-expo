@@ -3,10 +3,10 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FlashList } from "@shopify/flash-list";
-import { imageAssets } from '../../../constant/imageAssets';
+import { imageAssets } from '../../constant/imageAssets';
 import { FontAwesome6 } from '@expo/vector-icons';
-import ListItem from '../../../components/home/ListItem';
-import { RootBottomTabsParamList } from '../../RootBottomTabs';
+import ListItem from '../../components/home/ListItem';
+import { RootBottomTabsParamList } from '../../navigation/RootBottomTabs';
 
 export type Item = {
     id: string;

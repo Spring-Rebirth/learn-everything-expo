@@ -1,6 +1,6 @@
 import { View, Text, Image, Pressable, Dimensions } from "react-native";
 import Animated, { FadeIn, SharedTransition } from "react-native-reanimated";
-import { imageAssets } from "../../../constant/imageAssets";
+import { imageAssets } from "../../constant/imageAssets";
 
 const imagesMap: Record<string, any> = {
     a: imageAssets.nature1,

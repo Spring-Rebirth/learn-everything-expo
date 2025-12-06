@@ -1,6 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Onboarding from './screens/get-started/Onboarding';
+import Onboarding from '../screens/get-started/Onboarding';
 import { StatusBar } from 'expo-status-bar';
 import RootBottomTabs, { type RootBottomTabsParamList } from './RootBottomTabs';
 import PlaygroundEntryStack, { type PlaygroundEntryStackParamList } from './PlaygroundEntryStack';

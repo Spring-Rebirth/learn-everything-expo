@@ -1,5 +1,5 @@
 import { View, Image, Pressable, Dimensions } from "react-native";
-import { imageAssets } from "../../../constant/imageAssets";
+import { imageAssets } from "../../constant/imageAssets";
 import Animated, { SharedTransition } from "react-native-reanimated";
 
 const items = [

@@ -1,9 +1,9 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import SharedBoundsList from "./screens/playground-entry-stack/SharedBoundsList";
-import SharedBoundsDetail from "./screens/playground-entry-stack/SharedBoundsDetail";
-import ImageControlActions from "./screens/playground-entry-stack/ImageControlActions";
-import TinderSwipe from "./screens/playground-entry-stack/TinderSwipe";
-import ParallaxProfile from "./screens/playground-entry-stack/ParallaxProfile";
+import SharedBoundsList from "../screens/playground-entry-stack/SharedBoundsList";
+import SharedBoundsDetail from "../screens/playground-entry-stack/SharedBoundsDetail";
+import ImageControlActions from "../screens/playground-entry-stack/ImageControlActions";
+import TinderSwipe from "../screens/playground-entry-stack/TinderSwipe";
+import ParallaxProfile from "../screens/playground-entry-stack/ParallaxProfile";
 import { TouchableOpacity } from "react-native";
 import { FontAwesome6 } from '@expo/vector-icons';
 import { View } from "react-native";

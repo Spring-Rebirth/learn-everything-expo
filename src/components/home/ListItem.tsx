@@ -1,6 +1,6 @@
 import { View, Text, Pressable, Image } from 'react-native'
 import Animated, { FadeInDown } from 'react-native-reanimated'
-import { Item } from '../../navigation/screens/root-tabs/Home'
+import { Item } from '../../screens/root-tabs/Home'
 import { FontAwesome6 } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';

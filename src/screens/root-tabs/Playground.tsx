@@ -2,8 +2,8 @@ import { Pressable, ScrollView, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { RootStackParamList } from "../../../navigation";
-import { PlaygroundEntryStackParamList } from "../../PlaygroundEntryStack";
+import { RootStackParamList } from "../../navigation";
+import { PlaygroundEntryStackParamList } from "../../navigation/PlaygroundEntryStack";
 
 type PageItem = {
     id: string;

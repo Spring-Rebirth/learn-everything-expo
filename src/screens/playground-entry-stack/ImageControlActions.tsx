@@ -52,7 +52,7 @@ export default function ImageControlActions() {
         <View className="flex-1">
             <GestureDetector gesture={gesture}>
                 <Animated.Image
-                    source={require('../../../assets/images/emma-swoboda.jpg')}
+                    source={require('../../assets/images/emma-swoboda.jpg')}
                     style={[styles.image, animatedStyle]}
                 />
             </GestureDetector>
