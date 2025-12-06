@@ -55,6 +55,8 @@
     <string>Allow camera access to take photos and preview them in the lab.</string>
     <key>NSPhotoLibraryAddUsageDescription</key>
     <string>Allow saving captured photos to your library so you can view them later.</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Allow access to your photo library to view or manage saved photos.</string>
     <key>RCTNewArchEnabled</key>
     <true/>
     <key>UILaunchStoryboardName</key>
