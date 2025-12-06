@@ -3,10 +3,11 @@ import { useQuery } from '@tanstack/react-query';
 import { fetchPosts, Post } from '../../services/api';
 import { useThemeContext } from '../../providers/ThemeProvider';
 import * as Linking from 'expo-linking';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function Notice() {
   const { isDark } = useThemeContext();
-
+  const insets = useSafeAreaInsets();
   const {
     data,
     isPending,
@@ -65,7 +66,10 @@ export default function Notice() {
   }
 
   return (
-    <View className="flex-1" style={{ backgroundColor: isDark ? '#0f172a' : '#f8fafc' }}>
+    <View className="flex-1" style={{
+      backgroundColor: isDark ? '#0f172a' : '#f8fafc',
+      paddingTop: insets.top, paddingBottom: insets.bottom
+    }}>
       <FlatList
         data={posts}
         keyExtractor={(item) => String(item.id)}
