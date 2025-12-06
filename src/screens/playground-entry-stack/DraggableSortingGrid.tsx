@@ -48,7 +48,12 @@ function getOrder(x: number, y: number) {
   'worklet';
   const col = Math.round((x - MARGIN) / (SIZE + MARGIN * 2));
   const row = Math.round((y - MARGIN) / (SIZE + MARGIN * 2));
-  return row * COLUMNS + col;
+
+  // 增加边界检查
+  const clampedCol = Math.max(0, Math.min(col, COLUMNS - 1));
+  const clampedRow = Math.max(0, row);
+
+  return clampedRow * COLUMNS + clampedCol;
 }
 
 function SortableItem({ item, positions }: SortableItemProps) {
