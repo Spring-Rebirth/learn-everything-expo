@@ -9,6 +9,9 @@ import DraggableSortingGrid from "../screens/playground-entry-stack/DraggableSor
 import NotificationsLab from "../screens/playground-entry-stack/NotificationsLab";
 import CameraLab from "../screens/playground-entry-stack/CameraLab";
 import BottomSheetLab from "../screens/playground-entry-stack/BottomSheetLab";
+import MasonryFlashListLab from "../screens/playground-entry-stack/MasonryFlashListLab";
+import SvgPathAnimationLab from "../screens/playground-entry-stack/SvgPathAnimationLab";
+import PagerViewLab from "../screens/playground-entry-stack/PagerViewLab";
 import { TouchableOpacity } from "react-native";
 import { FontAwesome6 } from '@expo/vector-icons';
 import { View } from "react-native";
@@ -24,6 +27,9 @@ export type PlaygroundEntryStackParamList = {
   NotificationsLab: undefined;
   CameraLab: undefined;
   BottomSheetLab: undefined;
+  MasonryFlashListLab: undefined;
+  SvgPathAnimationLab: undefined;
+  PagerViewLab: undefined;
 };
 
 const Stack = createNativeStackNavigator<PlaygroundEntryStackParamList>();
@@ -78,6 +84,36 @@ export default function PlaygroundEntryStack() {
         component={BottomSheetLab}
         options={({ navigation }) => ({
           headerTitle: '可拖拽 BottomSheet',
+          headerLeft: () => (
+            <BackButton navigation={navigation} />
+          ),
+        })}
+      />
+      <Stack.Screen
+        name="MasonryFlashListLab"
+        component={MasonryFlashListLab}
+        options={({ navigation }) => ({
+          headerTitle: 'Masonry FlashList',
+          headerLeft: () => (
+            <BackButton navigation={navigation} />
+          ),
+        })}
+      />
+      <Stack.Screen
+        name="SvgPathAnimationLab"
+        component={SvgPathAnimationLab}
+        options={({ navigation }) => ({
+          headerTitle: 'SVG Path Animation',
+          headerLeft: () => (
+            <BackButton navigation={navigation} />
+          ),
+        })}
+      />
+      <Stack.Screen
+        name="PagerViewLab"
+        component={PagerViewLab}
+        options={({ navigation }) => ({
+          headerTitle: 'Pager View',
           headerLeft: () => (
             <BackButton navigation={navigation} />
           ),

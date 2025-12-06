@@ -30,6 +30,21 @@ export default function Playground() {
       destination: 'BottomSheetLab'
     },
     {
+      id: 'lab-masonry',
+      name: 'Masonry FlashList 瀑布流',
+      destination: 'MasonryFlashListLab'
+    },
+    {
+      id: 'lab-svg-anim',
+      name: 'SVG Path 动画',
+      destination: 'SvgPathAnimationLab'
+    },
+    {
+      id: 'lab-pager',
+      name: 'Pager View 引导页',
+      destination: 'PagerViewLab'
+    },
+    {
       id: '0',
       name: '手动手势',
       destination: 'ManualGestures'
