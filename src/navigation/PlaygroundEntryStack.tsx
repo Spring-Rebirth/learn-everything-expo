@@ -4,88 +4,110 @@ import SharedBoundsDetail from "../screens/playground-entry-stack/SharedBoundsDe
 import ImageControlActions from "../screens/playground-entry-stack/ImageControlActions";
 import TinderSwipe from "../screens/playground-entry-stack/TinderSwipe";
 import ParallaxProfile from "../screens/playground-entry-stack/ParallaxProfile";
+import ManualGestures from "../screens/playground-entry-stack/ManualGestures";
+import DraggableSortingGrid from "../screens/playground-entry-stack/DraggableSortingGrid";
 import { TouchableOpacity } from "react-native";
 import { FontAwesome6 } from '@expo/vector-icons';
 import { View } from "react-native";
 
 export type PlaygroundEntryStackParamList = {
-    // ManualGestures: undefined;
-    // DraggableSortingGrid: undefined;
-    SharedBoundsList: undefined;
-    SharedBoundsDetail: { id: string };
-    ImageControlActions: undefined;
-    TinderSwipe: undefined;
-    ParallaxProfile: undefined;
+  ManualGestures: undefined;
+  DraggableSortingGrid: undefined;
+  SharedBoundsList: undefined;
+  SharedBoundsDetail: { id: string };
+  ImageControlActions: undefined;
+  TinderSwipe: undefined;
+  ParallaxProfile: undefined;
 };
 
 const Stack = createNativeStackNavigator<PlaygroundEntryStackParamList>();
 
 function BackButton({ navigation }: { navigation: any }) {
-    return (
-        <TouchableOpacity
-            testID='back-button'
-            onPress={() => navigation.goBack()}
-        >
-            <View
-                className='w-12 h-12 rounded-full bg-white/90 items-center justify-center'
-                style={{
-                    shadowColor: '#000',
-                    shadowOffset: { width: 0, height: 2 },
-                    shadowOpacity: 0.1,
-                    shadowRadius: 8,
-                    elevation: 3,
-                }}
-            >
-                <FontAwesome6 name='arrow-left' size={20} color='#374151' iconStyle='solid' />
-            </View>
-        </TouchableOpacity>
-    );
+  return (
+    <TouchableOpacity
+      testID='back-button'
+      onPress={() => navigation.goBack()}
+    >
+      <View
+        className='w-12 h-12 rounded-full bg-white/90 items-center justify-center'
+        style={{
+          shadowColor: '#000',
+          shadowOffset: { width: 0, height: 2 },
+          shadowOpacity: 0.1,
+          shadowRadius: 8,
+          elevation: 3,
+        }}
+      >
+        <FontAwesome6 name='arrow-left' size={20} color='#374151' iconStyle='solid' />
+      </View>
+    </TouchableOpacity>
+  );
 }
 
 export default function PlaygroundEntryStack() {
-    return (
-        <Stack.Navigator initialRouteName="SharedBoundsList">
-            <Stack.Screen
-                name="SharedBoundsList"
-                component={SharedBoundsList}
-                options={({ navigation }) => ({
-                    headerTitleAlign: 'center',
-                    headerLeft: () => (
-                        <BackButton navigation={navigation} />
-                    ),
-                })}
-            />
-            <Stack.Screen
-                name="SharedBoundsDetail"
-                component={SharedBoundsDetail}
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <Stack.Screen
-                name="ImageControlActions"
-                component={ImageControlActions}
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <Stack.Screen
-                name="TinderSwipe"
-                component={TinderSwipe}
-                options={({ navigation }) => ({
-                    headerTitle: 'Tinder Swipe',
-                    headerLeft: () => (
-                        <BackButton navigation={navigation} />
-                    ),
-                })}
-            />
-            <Stack.Screen
-                name="ParallaxProfile"
-                component={ParallaxProfile}
-                options={{
-                    headerShown: false,
-                }}
-            />
-        </Stack.Navigator>
-    );
+  return (
+    <Stack.Navigator initialRouteName="SharedBoundsList">
+      <Stack.Screen
+        name="ManualGestures"
+        component={ManualGestures}
+        options={({ navigation }) => ({
+          headerTitle: 'Manual Gestures',
+          headerLeft: () => (
+            <BackButton navigation={navigation} />
+          ),
+        })}
+      />
+      <Stack.Screen
+        name="DraggableSortingGrid"
+        component={DraggableSortingGrid}
+        options={({ navigation }) => ({
+          headerTitle: 'Draggable Grid',
+          headerLeft: () => (
+            <BackButton navigation={navigation} />
+          ),
+        })}
+      />
+      <Stack.Screen
+        name="SharedBoundsList"
+        component={SharedBoundsList}
+        options={({ navigation }) => ({
+          headerTitleAlign: 'center',
+          headerLeft: () => (
+            <BackButton navigation={navigation} />
+          ),
+        })}
+      />
+      <Stack.Screen
+        name="SharedBoundsDetail"
+        component={SharedBoundsDetail}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="ImageControlActions"
+        component={ImageControlActions}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="TinderSwipe"
+        component={TinderSwipe}
+        options={({ navigation }) => ({
+          headerTitle: 'Tinder Swipe',
+          headerLeft: () => (
+            <BackButton navigation={navigation} />
+          ),
+        })}
+      />
+      <Stack.Screen
+        name="ParallaxProfile"
+        component={ParallaxProfile}
+        options={{
+          headerShown: false,
+        }}
+      />
+    </Stack.Navigator>
+  );
 }
