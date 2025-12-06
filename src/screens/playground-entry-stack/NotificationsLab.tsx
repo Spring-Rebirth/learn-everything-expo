@@ -46,7 +46,8 @@ export default function NotificationsLab() {
       const token = await Notifications.getExpoPushTokenAsync();
       setPushToken(token.data);
     } catch (err) {
-      setPushToken('获取 token 失败，请在真机并配置 projectId 后重试');
+      setPushToken('获取 token 失败，需要付费Apple开发者账号并配置Push Notifications: \n'
+        + JSON.stringify(err));
     }
   };
 
