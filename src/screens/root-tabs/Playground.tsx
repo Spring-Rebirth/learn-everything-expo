@@ -77,7 +77,7 @@ export default function Playground() {
   ];
 
   return (
-    <SafeAreaView className="flex-1">
+    <SafeAreaView className="flex-1 bg-white">
       <ScrollView className="p-4">
         {pageList.map((page) => (
           <Pressable
