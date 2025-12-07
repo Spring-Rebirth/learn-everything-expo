@@ -40,7 +40,6 @@ const linking: LinkingOptions<RootStackParamList> = {
           DraggableSortingGrid: 'draggable-grid',
           SharedBoundsList: 'shared-bounds',
           SharedBoundsDetail: 'shared-bounds/:id',
-          ImageControlActions: 'image-control',
           TinderSwipe: 'tinder-swipe',
           ParallaxProfile: 'parallax-profile',
           NotificationsLab: 'notifications',

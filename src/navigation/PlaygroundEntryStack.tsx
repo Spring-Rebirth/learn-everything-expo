@@ -1,7 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import SharedBoundsList from "../screens/playground-entry-stack/SharedBoundsList";
 import SharedBoundsDetail from "../screens/playground-entry-stack/SharedBoundsDetail";
-import ImageControlActions from "../screens/playground-entry-stack/ImageControlActions";
 import TinderSwipe from "../screens/playground-entry-stack/TinderSwipe";
 import ParallaxProfile from "../screens/playground-entry-stack/ParallaxProfile";
 import ManualGestures from "../screens/playground-entry-stack/ManualGestures";
@@ -21,7 +20,6 @@ export type PlaygroundEntryStackParamList = {
   DraggableSortingGrid: undefined;
   SharedBoundsList: undefined;
   SharedBoundsDetail: { id: string };
-  ImageControlActions: undefined;
   TinderSwipe: undefined;
   ParallaxProfile: undefined;
   NotificationsLab: undefined;
@@ -152,13 +150,6 @@ export default function PlaygroundEntryStack() {
       <Stack.Screen
         name="SharedBoundsDetail"
         component={SharedBoundsDetail}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Stack.Screen
-        name="ImageControlActions"
-        component={ImageControlActions}
         options={{
           headerShown: false,
         }}

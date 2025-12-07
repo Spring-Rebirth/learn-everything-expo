@@ -86,13 +86,6 @@ export default function Playground() {
       color: '#06b6d4'
     },
     {
-      id: '3',
-      name: 'Image Control',
-      destination: 'ImageControlActions',
-      icon: 'image',
-      color: '#84cc16'
-    },
-    {
       id: 'task-1',
       name: 'Deck Swiper',
       destination: 'TinderSwipe',
