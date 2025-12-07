@@ -32,7 +32,15 @@
           "image": "./assets/splash-icon.png"
         }
       ],
-      "react-native-bottom-tabs"
+      "react-native-bottom-tabs",
+      [
+        "expo-build-properties",
+        {
+          "ios": {
+            "deploymentTarget": "15.1"
+          }
+        }
+      ]
     ]
   }
 }
