@@ -52,11 +52,13 @@
       <true/>
     </dict>
     <key>NSCameraUsageDescription</key>
-    <string>Allow camera access to take photos and preview them in the lab.</string>
+    <string>Allow $(PRODUCT_NAME) to access your camera</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>Allow $(PRODUCT_NAME) to access your microphone</string>
     <key>NSPhotoLibraryAddUsageDescription</key>
-    <string>Allow saving captured photos to your library so you can view them later.</string>
+    <string>Allow $(PRODUCT_NAME) to save photos</string>
     <key>NSPhotoLibraryUsageDescription</key>
-    <string>Allow access to your photo library to view or manage saved photos.</string>
+    <string>Allow $(PRODUCT_NAME) to access your photos</string>
     <key>RCTNewArchEnabled</key>
     <true/>
     <key>UILaunchStoryboardName</key>
