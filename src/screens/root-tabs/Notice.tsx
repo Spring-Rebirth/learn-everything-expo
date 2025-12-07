@@ -67,8 +67,7 @@ export default function Notice() {
 
   return (
     <View className="flex-1" style={{
-      backgroundColor: isDark ? '#0f172a' : '#f8fafc',
-      paddingTop: insets.top, paddingBottom: insets.bottom
+      backgroundColor: isDark ? '#0f172a' : '#f8fafc', paddingTop: insets.top
     }}>
       <FlatList
         data={posts}
