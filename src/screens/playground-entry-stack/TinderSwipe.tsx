@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
 import { Image } from 'expo-image';
 import { GestureDetector, Gesture } from 'react-native-gesture-handler';
 import Animated, {
@@ -183,6 +183,22 @@ export default function TinderSwipe() {
         setCurrentIndex((prev) => prev + 1);
     };
 
+    const animateSwipe = (direction: 'left' | 'right') => {
+        if (currentIndex >= CARDS.length) return;
+
+        const activeSlot = currentIndex % 2;
+        const activeTranslation = activeSlot === 0 ? translationSlot0 : translationSlot1;
+        const target = direction === 'right' ? SCREEN_WIDTH * 1.5 : -SCREEN_WIDTH * 1.5;
+
+        activeTranslation.value = withTiming(
+            target,
+            { duration: 500, easing: Easing.out(Easing.cubic) },
+            () => {
+                scheduleOnRN(handleSwipeComplete);
+            }
+        );
+    };
+
     const renderSlot = (slotIndex: number) => {
         let cardIndexToShow = -1;
 
@@ -227,6 +243,22 @@ export default function TinderSwipe() {
             <View style={styles.cardStack}>
                 {renderSlot(0)}
                 {renderSlot(1)}
+            </View>
+            <View style={styles.actionRow}>
+                <TouchableOpacity
+                    style={[styles.actionButton, styles.nopeAction]}
+                    activeOpacity={0.8}
+                    onPress={() => animateSwipe('left')}
+                >
+                    <Text style={[styles.actionText, styles.nopeActionText]}>NOPE</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={[styles.actionButton, styles.likeAction]}
+                    activeOpacity={0.8}
+                    onPress={() => animateSwipe('right')}
+                >
+                    <Text style={[styles.actionText, styles.likeActionText]}>LIKE</Text>
+                </TouchableOpacity>
             </View>
         </SafeAreaView>
     );
@@ -315,5 +347,42 @@ const styles = StyleSheet.create({
         fontSize: 32,
         fontWeight: 'bold',
         color: '#FF6B6B',
+    },
+    actionRow: {
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
+        alignItems: 'center',
+        width: '100%',
+        paddingHorizontal: 24,
+        paddingVertical: 16,
+    },
+    actionButton: {
+        flex: 1,
+        marginHorizontal: 8,
+        height: 56,
+        borderRadius: 12,
+        justifyContent: 'center',
+        alignItems: 'center',
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 3 },
+        shadowOpacity: 0.2,
+        shadowRadius: 4,
+        elevation: 5,
+    },
+    actionText: {
+        fontSize: 20,
+        fontWeight: '700',
+    },
+    nopeAction: {
+        backgroundColor: '#FFE5E5',
+    },
+    likeAction: {
+        backgroundColor: '#E6F8F4',
+    },
+    nopeActionText: {
+        color: '#FF6B6B',
+    },
+    likeActionText: {
+        color: '#4ECDC4',
     },
 });
