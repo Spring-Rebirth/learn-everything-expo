@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Dimensions, Text, View } from 'react-native'
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import Animated, { Extrapolation, interpolate, useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
@@ -39,13 +39,16 @@ export default function TinderSwipe() {
     });
 
     function handleSwipe() {
-        sharedTranslateX.value = 0;
         setCurrentIndex((prev) => prev + 1);
     }
 
     function pressedReset() {
         setCurrentIndex(0);
     }
+
+    useEffect(() => {
+        sharedTranslateX.value = 0;
+    }, [currentIndex, sharedTranslateX]);
 
     return (
         <GestureHandlerRootView className="flex-1">
