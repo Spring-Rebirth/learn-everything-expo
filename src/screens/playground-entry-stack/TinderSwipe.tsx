@@ -20,14 +20,14 @@ export default function TinderSwipe() {
 
         const scale = interpolate(
             translationX,
-            [0, SCREEN_WIDTH / 2],
+            [0, SCREEN_WIDTH * 0.3],
             [0.9, 1], // 从 0.9 放大到 1
             Extrapolation.CLAMP
         );
 
         const opacity = interpolate(
             translationX,
-            [0, SCREEN_WIDTH / 2],
+            [0, SCREEN_WIDTH * 0.3],
             [0.6, 1], // 透明度从 0.6 变到 1
             Extrapolation.CLAMP
         );
