@@ -11,6 +11,7 @@ import BottomSheetLab from "../screens/playground-entry-stack/BottomSheetLab";
 import MasonryFlashListLab from "../screens/playground-entry-stack/MasonryFlashListLab";
 import SvgPathAnimationLab from "../screens/playground-entry-stack/SvgPathAnimationLab";
 import PagerViewLab from "../screens/playground-entry-stack/PagerViewLab";
+import SkeletonLab from "../screens/playground-entry-stack/SkeletonLab";
 import { TouchableOpacity } from "react-native";
 import { FontAwesome6 } from '@expo/vector-icons';
 import { View } from "react-native";
@@ -28,6 +29,7 @@ export type PlaygroundEntryStackParamList = {
   MasonryFlashListLab: undefined;
   SvgPathAnimationLab: undefined;
   PagerViewLab: undefined;
+  SkeletonLab: undefined;
 };
 
 const Stack = createNativeStackNavigator<PlaygroundEntryStackParamList>();
@@ -116,6 +118,13 @@ export default function PlaygroundEntryStack() {
             <BackButton navigation={navigation} />
           ),
         })}
+      />
+      <Stack.Screen
+        name="SkeletonLab"
+        component={SkeletonLab}
+        options={{
+          headerShown: false,
+        }}
       />
       <Stack.Screen
         name="ManualGestures"

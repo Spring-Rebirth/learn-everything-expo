@@ -65,6 +65,13 @@ export default function Playground() {
       color: '#6366f1'
     },
     {
+      id: 'lab-skeleton',
+      name: 'Skeleton Loading',
+      destination: 'SkeletonLab',
+      icon: 'bone',
+      color: '#64748b'
+    },
+    {
       id: '0',
       name: 'Manual Gestures',
       destination: 'ManualGestures',
