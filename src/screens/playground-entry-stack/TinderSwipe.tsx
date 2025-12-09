@@ -1,24 +1,24 @@
 import { useState } from 'react';
 import { Dimensions, Text, View } from 'react-native'
 import { Gesture, GestureDetector, GestureHandlerRootView } from 'react-native-gesture-handler';
-import Animated, { Extrapolation, interpolate, useAnimatedStyle, useDerivedValue, useSharedValue, withSpring } from 'react-native-reanimated';
-import { scheduleOnRN } from 'react-native-worklets'
+import Animated, { Extrapolation, interpolate, useAnimatedStyle, useDerivedValue, useSharedValue, withSpring, runOnJS } from 'react-native-reanimated';
 import { CARDS } from '../../constant/mockCards';
 import Card from '../../components/playground/Card';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const SWIPE_THRESHOLD = SCREEN_WIDTH * 0.3;
 
-export default function TinderSwipe() {
-    const [currentIndex, setCurrentIndex] = useState<number>(0);
-    const activeCard = CARDS[currentIndex];
-    const nextCard = CARDS[currentIndex + 1];
+type CardType = typeof CARDS[0];
 
-    // 1. 定义共享值
+interface SwipeableCardProps {
+    card: CardType;
+    onSwipe: () => void;
+}
+
+function SwipeableCard({ card, onSwipe }: SwipeableCardProps) {
     const translateX = useSharedValue(0);
     const translateY = useSharedValue(0);
 
-    // 2. 手势逻辑
     const panGesture = Gesture.Pan()
         .onUpdate((event) => {
             translateX.value = event.translationX;
@@ -30,24 +30,18 @@ export default function TinderSwipe() {
                 const destX = direction === 'right' ? SCREEN_WIDTH * 1.5 : -SCREEN_WIDTH * 1.5;
                 const destY = (event.translationY / event.translationX) * destX;
 
-                const callback = direction === 'left' ? onSwipeRight : onSwipeLeft;
-
-                // --- 修复重点：调整 Spring 配置 ---
                 const springConfig = {
                     velocity: event.velocityX,
                     stiffness: 80,
                     damping: 20,
-                    // 👇 新增：防止来回震荡，让动画结束得更干脆
                     overshootClamping: true,
-                    // 👇 新增：只要距离终点 10px 以内就算结束 (默认是很小的 0.001)
                     restDisplacementThreshold: 0.1,
-                    // 👇 新增：只要速度小于 10 就算结束 (默认是 0.001)
                     restSpeedThreshold: 0.1,
                 };
 
                 translateX.value = withSpring(destX, springConfig, (finished) => {
-                    if (finished && callback) {
-                        scheduleOnRN(callback);
+                    if (finished) {
+                        runOnJS(onSwipe)();
                     }
                 });
 
@@ -75,23 +69,31 @@ export default function TinderSwipe() {
         ],
     }));
 
-    // --- 状态更新函数 ---
-    function onSwipeLeft() {
-        setCurrentIndex((prev) => prev + 1);
-        translateX.value = 0;
-        translateY.value = 0;
-    }
+    return (
+        <GestureDetector gesture={panGesture}>
+            <Animated.View
+                className="absolute w-[90%] h-[60%] shadow-xl"
+                style={[
+                    animatedStyle,
+                    { zIndex: 10 }
+                ]}
+            >
+                <Card card={card} />
+            </Animated.View>
+        </GestureDetector>
+    );
+}
 
-    function onSwipeRight() {
+export default function TinderSwipe() {
+    const [currentIndex, setCurrentIndex] = useState<number>(0);
+    const activeCard = CARDS[currentIndex];
+    const nextCard = CARDS[currentIndex + 1];
+
+    function handleSwipe() {
         setCurrentIndex((prev) => prev + 1);
-        translateX.value = 0;
-        translateY.value = 0;
     }
 
     function pressedReset() {
-        // 先归位动画值，再重置 Index，避免闪烁
-        translateX.value = 0;
-        translateY.value = 0;
         setCurrentIndex(0);
     }
 
@@ -111,17 +113,11 @@ export default function TinderSwipe() {
 
                 {/* --- B. 顶层卡片 (Active Card) --- */}
                 {activeCard ? (
-                    <GestureDetector gesture={panGesture}>
-                        <Animated.View
-                            className="absolute w-[90%] h-[60%] shadow-xl"
-                            style={[
-                                animatedStyle,
-                                { zIndex: 10 }
-                            ]}
-                        >
-                            <Card card={activeCard} />
-                        </Animated.View>
-                    </GestureDetector>
+                    <SwipeableCard
+                        key={activeCard.id}
+                        card={activeCard}
+                        onSwipe={handleSwipe}
+                    />
                 ) : (
                     /* --- C. 重置区域 --- */
                     <View className="items-center justify-center gap-5">
