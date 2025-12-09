@@ -57,7 +57,7 @@ export default function TinderSwipe() {
                 {/* --- A. 底层卡片 (Next Card) --- */}
                 {nextCard && (
                     <Animated.View
-                        className="absolute w-[90%] h-[60%] shadow-xl"
+                        className="absolute w-[90%] h-[60%]"
                         style={[{ zIndex: 0 }, nextCardStyle]}
                     >
                         <Card card={nextCard} />

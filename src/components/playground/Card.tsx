@@ -9,7 +9,7 @@ type CardType = {
 
 export default function Card({ card }: { card: CardType }) {
     return (
-        <View className="flex-1 bg-white rounded-3xl overflow-hidden shadow-xl w-full h-full">
+        <View className="flex-1 bg-white rounded-3xl overflow-hidden w-full h-full border border-neutral-200">
             <Image
                 source={{ uri: card.uri }}
                 className="w-full h-[85%]"

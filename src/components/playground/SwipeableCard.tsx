@@ -106,7 +106,7 @@ export default function SwipeableCard({ card, onSwipe, sharedTranslateX }: Swipe
     return (
         <GestureDetector gesture={panGesture}>
             <Animated.View
-                className="absolute w-[90%] h-[60%] shadow-xl"
+                className="absolute w-[90%] h-[60%]"
                 style={[
                     animatedStyle,
                     { zIndex: 10 }
