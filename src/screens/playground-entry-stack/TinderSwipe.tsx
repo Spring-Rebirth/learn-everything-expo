@@ -1,95 +1,45 @@
 import { useState } from 'react';
 import { Dimensions, Text, View } from 'react-native'
-import { Gesture, GestureDetector, GestureHandlerRootView } from 'react-native-gesture-handler';
-import Animated, { Extrapolation, interpolate, useAnimatedStyle, useDerivedValue, useSharedValue, withSpring, runOnJS } from 'react-native-reanimated';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import Animated, { Extrapolation, interpolate, useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
 import { CARDS } from '../../constant/mockCards';
 import Card from '../../components/playground/Card';
+import SwipeableCard from '../../components/playground/SwipeableCard';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
-const SWIPE_THRESHOLD = SCREEN_WIDTH * 0.3;
-
-type CardType = typeof CARDS[0];
-
-interface SwipeableCardProps {
-    card: CardType;
-    onSwipe: () => void;
-}
-
-function SwipeableCard({ card, onSwipe }: SwipeableCardProps) {
-    const translateX = useSharedValue(0);
-    const translateY = useSharedValue(0);
-
-    const panGesture = Gesture.Pan()
-        .onUpdate((event) => {
-            translateX.value = event.translationX;
-            translateY.value = event.translationY;
-        })
-        .onEnd((event) => {
-            if (Math.abs(event.translationX) > SWIPE_THRESHOLD) {
-                const direction = event.translationX > 0 ? 'right' : 'left';
-                const destX = direction === 'right' ? SCREEN_WIDTH * 1.5 : -SCREEN_WIDTH * 1.5;
-                const destY = (event.translationY / event.translationX) * destX;
-
-                const springConfig = {
-                    velocity: event.velocityX,
-                    stiffness: 80,
-                    damping: 20,
-                    overshootClamping: true,
-                    restDisplacementThreshold: 0.1,
-                    restSpeedThreshold: 0.1,
-                };
-
-                translateX.value = withSpring(destX, springConfig, (finished) => {
-                    if (finished) {
-                        runOnJS(onSwipe)();
-                    }
-                });
-
-                translateY.value = withSpring(destY, springConfig);
-            } else {
-                translateX.value = withSpring(0);
-                translateY.value = withSpring(0);
-            }
-        });
-
-    const rotate = useDerivedValue(() => {
-        return interpolate(
-            translateX.value,
-            [-SCREEN_WIDTH / 2, 0, SCREEN_WIDTH / 2],
-            [-10, 0, 10],
-            Extrapolation.CLAMP
-        );
-    });
-
-    const animatedStyle = useAnimatedStyle(() => ({
-        transform: [
-            { translateX: translateX.value },
-            { translateY: translateY.value },
-            { rotate: `${rotate.value}deg` },
-        ],
-    }));
-
-    return (
-        <GestureDetector gesture={panGesture}>
-            <Animated.View
-                className="absolute w-[90%] h-[60%] shadow-xl"
-                style={[
-                    animatedStyle,
-                    { zIndex: 10 }
-                ]}
-            >
-                <Card card={card} />
-            </Animated.View>
-        </GestureDetector>
-    );
-}
 
 export default function TinderSwipe() {
     const [currentIndex, setCurrentIndex] = useState<number>(0);
     const activeCard = CARDS[currentIndex];
     const nextCard = CARDS[currentIndex + 1];
 
+    const translateX = useSharedValue(0);
+
+    const nextCardStyle = useAnimatedStyle(() => {
+        const translation = Math.abs(translateX.value);
+
+        const scale = interpolate(
+            translation,
+            [0, SCREEN_WIDTH / 2],
+            [0.9, 1], // 从 0.9 放大到 1
+            Extrapolation.CLAMP
+        );
+
+        const opacity = interpolate(
+            translation,
+            [0, SCREEN_WIDTH / 2],
+            [0.6, 1], // 透明度从 0.6 变到 1
+            Extrapolation.CLAMP
+        );
+
+        return {
+            transform: [{ scale }],
+            opacity,
+        };
+    });
+
     function handleSwipe() {
+        translateX.value = 0;
         setCurrentIndex((prev) => prev + 1);
     }
 
@@ -103,12 +53,12 @@ export default function TinderSwipe() {
 
                 {/* --- A. 底层卡片 (Next Card) --- */}
                 {nextCard && (
-                    <View
+                    <Animated.View
                         className="absolute w-[90%] h-[60%] shadow-xl"
-                        style={{ zIndex: 0 }}
+                        style={[{ zIndex: 0 }, nextCardStyle]}
                     >
                         <Card card={nextCard} />
-                    </View>
+                    </Animated.View>
                 )}
 
                 {/* --- B. 顶层卡片 (Active Card) --- */}
@@ -117,6 +67,7 @@ export default function TinderSwipe() {
                         key={activeCard.id}
                         card={activeCard}
                         onSwipe={handleSwipe}
+                        translateX={translateX}
                     />
                 ) : (
                     /* --- C. 重置区域 --- */
