@@ -21,16 +21,19 @@ type CardType = typeof CARDS[0];
 interface SwipeableCardProps {
     card: CardType;
     onSwipe: () => void;
-    translateX: SharedValue<number>;
+    sharedTranslateX: SharedValue<number>;
 }
 
-export default function SwipeableCard({ card, onSwipe, translateX }: SwipeableCardProps) {
+export default function SwipeableCard({ card, onSwipe, sharedTranslateX }: SwipeableCardProps) {
+    const translateX = useSharedValue(0);
     const translateY = useSharedValue(0);
 
     const panGesture = Gesture.Pan()
         .onUpdate((event) => {
             translateX.value = event.translationX;
             translateY.value = event.translationY;
+
+            sharedTranslateX.value = event.translationX;
         })
         .onEnd((event) => {
             if (Math.abs(event.translationX) > SWIPE_THRESHOLD) {
@@ -57,6 +60,8 @@ export default function SwipeableCard({ card, onSwipe, translateX }: SwipeableCa
             } else {
                 translateX.value = withSpring(0);
                 translateY.value = withSpring(0);
+
+                sharedTranslateX.value = withSpring(0);
             }
         });
 

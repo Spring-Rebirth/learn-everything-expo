@@ -13,20 +13,20 @@ export default function TinderSwipe() {
     const activeCard = CARDS[currentIndex];
     const nextCard = CARDS[currentIndex + 1];
 
-    const translateX = useSharedValue(0);
+    const sharedTranslateX = useSharedValue(0);
 
     const nextCardStyle = useAnimatedStyle(() => {
-        const translation = Math.abs(translateX.value);
+        const translationX = Math.abs(sharedTranslateX.value);
 
         const scale = interpolate(
-            translation,
+            translationX,
             [0, SCREEN_WIDTH / 2],
             [0.9, 1], // 从 0.9 放大到 1
             Extrapolation.CLAMP
         );
 
         const opacity = interpolate(
-            translation,
+            translationX,
             [0, SCREEN_WIDTH / 2],
             [0.6, 1], // 透明度从 0.6 变到 1
             Extrapolation.CLAMP
@@ -39,7 +39,7 @@ export default function TinderSwipe() {
     });
 
     function handleSwipe() {
-        translateX.value = 0;
+        sharedTranslateX.value = 0;
         setCurrentIndex((prev) => prev + 1);
     }
 
@@ -67,7 +67,7 @@ export default function TinderSwipe() {
                         key={activeCard.id}
                         card={activeCard}
                         onSwipe={handleSwipe}
-                        translateX={translateX}
+                        sharedTranslateX={sharedTranslateX}
                     />
                 ) : (
                     /* --- C. 重置区域 --- */
