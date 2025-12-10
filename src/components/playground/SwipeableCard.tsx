@@ -22,9 +22,10 @@ interface SwipeableCardProps {
     card: CardType;
     onSwipe: () => void;
     sharedTranslateX: SharedValue<number>;
+    zIndex?: number;
 }
 
-export default function SwipeableCard({ card, onSwipe, sharedTranslateX }: SwipeableCardProps) {
+export default function SwipeableCard({ card, onSwipe, sharedTranslateX, zIndex = 10 }: SwipeableCardProps) {
     const translateX = useSharedValue(0);
     const translateY = useSharedValue(0);
 
@@ -109,7 +110,7 @@ export default function SwipeableCard({ card, onSwipe, sharedTranslateX }: Swipe
                 className="absolute w-[90%] h-[60%]"
                 style={[
                     animatedStyle,
-                    { zIndex: 10 }
+                    { zIndex }
                 ]}
             >
                 <Card card={card} />

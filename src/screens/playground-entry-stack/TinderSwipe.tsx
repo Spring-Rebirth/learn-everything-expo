@@ -8,6 +8,11 @@ import SwipeableCard from '../../components/playground/SwipeableCard';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
+const CARD_Z_INDEX = {
+    BACKGROUND: 0,
+    FOREGROUND: 10,
+};
+
 export default function TinderSwipe() {
     const [currentIndex, setCurrentIndex] = useState<number>(0);
     const activeCard = CARDS[currentIndex];
@@ -58,7 +63,7 @@ export default function TinderSwipe() {
                 {nextCard && (
                     <Animated.View
                         className="absolute w-[90%] h-[60%]"
-                        style={[{ zIndex: 0 }, nextCardStyle]}
+                        style={[{ zIndex: CARD_Z_INDEX.BACKGROUND }, nextCardStyle]}
                     >
                         <Card card={nextCard} />
                     </Animated.View>
@@ -71,6 +76,7 @@ export default function TinderSwipe() {
                         card={activeCard}
                         onSwipe={handleSwipe}
                         sharedTranslateX={sharedTranslateX}
+                        zIndex={CARD_Z_INDEX.FOREGROUND}
                     />
                 ) : (
                     /* --- C. 重置区域 --- */
