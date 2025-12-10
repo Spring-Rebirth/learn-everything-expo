@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Dimensions, Text, View } from 'react-native'
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import Animated, { Extrapolation, interpolate, useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
+import { Extrapolation, interpolate, useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
 import { CARDS } from '../../constant/mockCards';
-import Card from '../../components/playground/Card';
 import SwipeableCard from '../../components/playground/SwipeableCard';
 import BackgroundCard from '../../components/playground/BackgroundCard';
 
@@ -64,7 +63,7 @@ export default function TinderSwipe() {
                 {nextCard && (
                     <BackgroundCard
                         card={nextCard}
-                        style={nextCardStyle}
+                        AnimatedStyle={nextCardStyle}
                         zIndex={CARD_Z_INDEX.BACKGROUND}
                     />
                 )}

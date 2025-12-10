@@ -1,5 +1,5 @@
 import React from 'react';
-import Animated from 'react-native-reanimated';
+import Animated, { type AnimatedStyle } from 'react-native-reanimated';
 import Card from './Card';
 
 type CardType = {
@@ -11,15 +11,15 @@ type CardType = {
 
 interface BackgroundCardProps {
     card: CardType;
-    style: any;
+    AnimatedStyle: AnimatedStyle;
     zIndex?: number;
 }
 
-export default function BackgroundCard({ card, style, zIndex = 0 }: BackgroundCardProps) {
+export default function BackgroundCard({ card, AnimatedStyle, zIndex = 0 }: BackgroundCardProps) {
     return (
         <Animated.View
             className="absolute w-[90%] h-[60%]"
-            style={[{ zIndex }, style]}
+            style={[{ zIndex }, AnimatedStyle]}
         >
             <Card card={card} />
         </Animated.View>
