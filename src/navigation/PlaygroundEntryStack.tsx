@@ -12,6 +12,7 @@ import MasonryFlashListLab from "../screens/playground-entry-stack/MasonryFlashL
 import SvgPathAnimationLab from "../screens/playground-entry-stack/SvgPathAnimationLab";
 import PagerViewLab from "../screens/playground-entry-stack/PagerViewLab";
 import SkeletonLab from "../screens/playground-entry-stack/SkeletonLab";
+import InterpolateLab from "../screens/playground-entry-stack/InterpolateLab";
 import { TouchableOpacity } from "react-native";
 import { FontAwesome6 } from '@expo/vector-icons';
 import { View } from "react-native";
@@ -30,6 +31,7 @@ export type PlaygroundEntryStackParamList = {
   SvgPathAnimationLab: undefined;
   PagerViewLab: undefined;
   SkeletonLab: undefined;
+  InterpolateLab: undefined;
 };
 
 const Stack = createNativeStackNavigator<PlaygroundEntryStackParamList>();
@@ -176,6 +178,13 @@ export default function PlaygroundEntryStack() {
       <Stack.Screen
         name="ParallaxProfile"
         component={ParallaxProfile}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="InterpolateLab"
+        component={InterpolateLab}
         options={{
           headerShown: false,
         }}

@@ -105,6 +105,13 @@ export default function Playground() {
       destination: 'ParallaxProfile',
       icon: 'up-down',
       color: '#a855f7'
+    },
+    {
+      id: 'task-3',
+      name: 'Interpolation Lab',
+      destination: 'InterpolateLab',
+      icon: 'sliders',
+      color: '#f97316'
     }
   ];
 
