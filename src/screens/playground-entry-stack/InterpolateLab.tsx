@@ -12,6 +12,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { GestureHandlerRootView, GestureDetector, Gesture } from 'react-native-gesture-handler';
+import { FloatingBackButton } from '../../components/playground/FloatingBackButton';
 
 const { width } = Dimensions.get('window');
 
@@ -82,104 +83,107 @@ export default function InterpolateLab() {
     const items = [0, 1, 2, 3, 4];
 
     return (
-        <ScrollView
-            className="flex-1 bg-slate-50"
-            contentContainerStyle={{ padding: 20, paddingBottom: 100, paddingTop: insets.top + 20 }}
-        >
-            <Text className="text-slate-500 mb-6 italic">
-                Exercises for interpolate() and interpolateColor()
-            </Text>
+        <View className="flex-1 bg-slate-50">
+            <FloatingBackButton />
+            <ScrollView
+                className="flex-1 bg-slate-50"
+                contentContainerStyle={{ padding: 20, paddingBottom: 100, paddingTop: insets.top + 60 }}
+            >
+                <Text className="text-slate-500 mb-6 italic">
+                    Exercises for interpolate() and interpolateColor()
+                </Text>
 
-            {/* Exercise 1: Basic Interpolation */}
-            <Section title="1. Scale, Opacity & Radius">
-                <Animated.View
-                    style={[{ width: 100, height: 100, backgroundColor: '#8b5cf6' }, boxStyle]}
-                />
-                <View className="mt-4 flex-row items-center gap-2">
-                    <Text>Toggle Effect</Text>
-                    <Switch
-                        value={progress.value === 1}
-                        onValueChange={(v) => { progress.value = withSpring(v ? 1 : 0); }}
+                {/* Exercise 1: Basic Interpolation */}
+                <Section title="1. Scale, Opacity & Radius">
+                    <Animated.View
+                        style={[{ width: 100, height: 100, backgroundColor: '#8b5cf6' }, boxStyle]}
                     />
-                </View>
-                <Text className="text-xs text-slate-400 mt-2">
-                    Input [0, 1] {'->'} Scale [1, 1.5], Opacity [0.5, 1], Radius [10, 50]
-                </Text>
-            </Section>
+                    <View className="mt-4 flex-row items-center gap-2">
+                        <Text>Toggle Effect</Text>
+                        <Switch
+                            value={progress.value === 1}
+                            onValueChange={(v) => { progress.value = withSpring(v ? 1 : 0); }}
+                        />
+                    </View>
+                    <Text className="text-xs text-slate-400 mt-2">
+                        Input [0, 1] {'->'} Scale [1, 1.5], Opacity [0.5, 1], Radius [10, 50]
+                    </Text>
+                </Section>
 
-            {/* Exercise 2: Color Interpolation */}
-            <Section title="2. Color & Width">
-                <Animated.View
-                    style={[{ height: 60, borderRadius: 10 }, colorStyle]}
-                />
-                <View className="mt-4 flex-row items-center gap-2">
-                    <Text>Change Color</Text>
-                    <Switch
-                        value={colorProgress.value === 1}
-                        onValueChange={(v) => { colorProgress.value = withTiming(v ? 1 : 0); }}
+                {/* Exercise 2: Color Interpolation */}
+                <Section title="2. Color & Width">
+                    <Animated.View
+                        style={[{ height: 60, borderRadius: 10 }, colorStyle]}
                     />
-                </View>
-                <Text className="text-xs text-slate-400 mt-2">
-                    Input [0, 1] {'->'} Color [Blue, Red], Width [100, 200]
-                </Text>
-            </Section>
+                    <View className="mt-4 flex-row items-center gap-2">
+                        <Text>Change Color</Text>
+                        <Switch
+                            value={colorProgress.value === 1}
+                            onValueChange={(v) => { colorProgress.value = withTiming(v ? 1 : 0); }}
+                        />
+                    </View>
+                    <Text className="text-xs text-slate-400 mt-2">
+                        Input [0, 1] {'->'} Color [Blue, Red], Width [100, 200]
+                    </Text>
+                </Section>
 
-            {/* Exercise 3: Rotation (Infinite loop logic possible, but here simple toggle) */}
-            <Section title="3. Rotation (Deg)">
-                <Animated.View
-                    style={[{ width: 80, height: 80, backgroundColor: '#10b981', justifyContent: 'center', alignItems: 'center' }, rotateStyle]}
-                >
-                    <Text className="text-white font-bold">SPIN</Text>
-                </Animated.View>
-                <View className="mt-4 flex-row items-center gap-2">
-                    <Text>Spin 360</Text>
-                    <Switch
-                        value={rotateProgress.value === 1}
-                        onValueChange={(v) => { rotateProgress.value = withSpring(v ? 1 : 0); }}
-                    />
-                </View>
-                <Text className="text-xs text-slate-400 mt-2">
-                    Input [0, 1] {'->'} Rotate [0deg, 360deg]
-                </Text>
-            </Section>
+                {/* Exercise 3: Rotation (Infinite loop logic possible, but here simple toggle) */}
+                <Section title="3. Rotation (Deg)">
+                    <Animated.View
+                        style={[{ width: 80, height: 80, backgroundColor: '#10b981', justifyContent: 'center', alignItems: 'center' }, rotateStyle]}
+                    >
+                        <Text className="text-white font-bold">SPIN</Text>
+                    </Animated.View>
+                    <View className="mt-4 flex-row items-center gap-2">
+                        <Text>Spin 360</Text>
+                        <Switch
+                            value={rotateProgress.value === 1}
+                            onValueChange={(v) => { rotateProgress.value = withSpring(v ? 1 : 0); }}
+                        />
+                    </View>
+                    <Text className="text-xs text-slate-400 mt-2">
+                        Input [0, 1] {'->'} Rotate [0deg, 360deg]
+                    </Text>
+                </Section>
 
-            {/* Exercise 4: Scroll Interpolation */}
-            <Section title="4. Scroll Interpolation (Parallax)">
-                <Animated.ScrollView
-                    horizontal
-                    pagingEnabled
-                    onScroll={scrollHandler}
-                    scrollEventThrottle={16}
-                    showsHorizontalScrollIndicator={false}
-                    className="w-full h-40"
-                    contentContainerStyle={{ alignItems: 'center' }}
-                >
-                    {items.map((_, index) => {
-                        // TODO: 在这里实现每个卡片的动画样式
-                        // 提示：你需要根据 index 计算当前卡片的中心点位置
-                        const style = useAnimatedStyle(() => {
-                            return {};
-                        });
+                {/* Exercise 4: Scroll Interpolation */}
+                <Section title="4. Scroll Interpolation (Parallax)">
+                    <Animated.ScrollView
+                        horizontal
+                        pagingEnabled
+                        onScroll={scrollHandler}
+                        scrollEventThrottle={16}
+                        showsHorizontalScrollIndicator={false}
+                        className="w-full h-40"
+                        contentContainerStyle={{ alignItems: 'center' }}
+                    >
+                        {items.map((_, index) => {
+                            // TODO: 在这里实现每个卡片的动画样式
+                            // 提示：你需要根据 index 计算当前卡片的中心点位置
+                            const style = useAnimatedStyle(() => {
+                                return {};
+                            });
 
-                        return (
-                            <View key={index} style={{ width: width * 0.7, padding: 10 }}>
-                                <Animated.View
-                                    className="flex-1 bg-indigo-500 rounded-2xl items-center justify-center shadow-lg overflow-hidden"
-                                    style={style}
-                                >
-                                    <Text className="text-white text-3xl font-bold">{index + 1}</Text>
-                                    <Animated.Text className="text-white/80 mt-2">
-                                        Card {index + 1}
-                                    </Animated.Text>
-                                </Animated.View>
-                            </View>
-                        );
-                    })}
-                </Animated.ScrollView>
-                <Text className="text-xs text-slate-400 mt-2 text-center">
-                    Scroll horizontally to see Scale & Opacity changes
-                </Text>
-            </Section>
-        </ScrollView>
+                            return (
+                                <View key={index} style={{ width: width * 0.7, padding: 10 }}>
+                                    <Animated.View
+                                        className="flex-1 bg-indigo-500 rounded-2xl items-center justify-center shadow-lg overflow-hidden"
+                                        style={style}
+                                    >
+                                        <Text className="text-white text-3xl font-bold">{index + 1}</Text>
+                                        <Animated.Text className="text-white/80 mt-2">
+                                            Card {index + 1}
+                                        </Animated.Text>
+                                    </Animated.View>
+                                </View>
+                            );
+                        })}
+                    </Animated.ScrollView>
+                    <Text className="text-xs text-slate-400 mt-2 text-center">
+                        Scroll horizontally to see Scale & Opacity changes
+                    </Text>
+                </Section>
+            </ScrollView>
+        </View>
     );
 }
