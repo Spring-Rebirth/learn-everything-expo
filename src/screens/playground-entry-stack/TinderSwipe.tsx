@@ -5,6 +5,7 @@ import Animated, { Extrapolation, interpolate, useAnimatedStyle, useSharedValue 
 import { CARDS } from '../../constant/mockCards';
 import Card from '../../components/playground/Card';
 import SwipeableCard from '../../components/playground/SwipeableCard';
+import BackgroundCard from '../../components/playground/BackgroundCard';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
@@ -61,12 +62,11 @@ export default function TinderSwipe() {
 
                 {/* --- A. 底层卡片 (Next Card) --- */}
                 {nextCard && (
-                    <Animated.View
-                        className="absolute w-[90%] h-[60%]"
-                        style={[{ zIndex: CARD_Z_INDEX.BACKGROUND }, nextCardStyle]}
-                    >
-                        <Card card={nextCard} />
-                    </Animated.View>
+                    <BackgroundCard
+                        card={nextCard}
+                        style={nextCardStyle}
+                        zIndex={CARD_Z_INDEX.BACKGROUND}
+                    />
                 )}
 
                 {/* --- B. 顶层卡片 (Active Card) --- */}
