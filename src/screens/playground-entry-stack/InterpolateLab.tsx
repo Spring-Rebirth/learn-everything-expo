@@ -114,7 +114,16 @@ export default function InterpolateLab() {
     // 提示：transform: [{ rotate: `${degrees}deg` }]
     const rotateStyle = useAnimatedStyle(() => {
         // TODO: 在这里实现你的代码
-        return {};
+        const degrees = interpolate(
+            rotateProgress.value,
+            [0, 1],
+            [0, 360],
+            Extrapolation.CLAMP,
+        );
+
+        return {
+            transform: [{ rotate: `${degrees}deg` }]
+        };
     });
 
     // 练习 4：滚动视差 (高级)
