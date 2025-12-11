@@ -55,37 +55,33 @@ export default function InterpolateLab() {
     //    - 缩放 (scale): 1 -> 1.5
     //    - 透明度 (opacity): 0.5 -> 1
     //    - 圆角 (borderRadius): 10 -> 50
-    const scaleBox = useSharedValue(1);
-    const opacityBox = useSharedValue(0.5);
-    const borderRadiusBox = useSharedValue(10);
 
+    /**
+     * 反例说明
+     * 在 useAnimatedStyle 中给 shared values 赋值，然后在返回对象中读取它们，
+     * 这不符合 useAnimatedStyle 的用法。useAnimatedStyle 应基于 shared values
+     * 计算样式，而不是修改 shared values。
+     */
     const boxStyle = useAnimatedStyle(() => {
-
-        scaleBox.value = interpolate(
-            progress.value,
-            [0, 1],
-            [1, 1.5],
-            Extrapolation.CLAMP,
-        );
-
-        opacityBox.value = interpolate(
-            progress.value,
-            [0, 1],
-            [0.5, 1],
-            Extrapolation.CLAMP,
-        );
-
-        borderRadiusBox.value = interpolate(
-            progress.value,
-            [0, 1],
-            [10, 50],
-            Extrapolation.CLAMP,
-        );
-
         return {
-            scale: scaleBox.value,
-            opacity: opacityBox.value,
-            borderRadius: borderRadiusBox.value
+            scale: interpolate(
+                progress.value,
+                [0, 1],
+                [1, 1.5],
+                Extrapolation.CLAMP,
+            ),
+            opacity: interpolate(
+                progress.value,
+                [0, 1],
+                [0.5, 1],
+                Extrapolation.CLAMP,
+            ),
+            borderRadius: interpolate(
+                progress.value,
+                [0, 1],
+                [10, 50],
+                Extrapolation.CLAMP,
+            ),
         };
     });
 
