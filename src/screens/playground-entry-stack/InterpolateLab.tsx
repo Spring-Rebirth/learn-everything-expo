@@ -91,7 +91,21 @@ export default function InterpolateLab() {
     // 同时让宽度从 100 变到 200
     const colorStyle = useAnimatedStyle(() => {
         // TODO: 在这里实现你的代码
-        return {};
+        return {
+            // 注意：不能用color，这是用于文本颜色的
+            backgroundColor: interpolateColor(
+                colorProgress.value,
+                [0, 1],
+                ["blue", "red"],
+                "RGB",
+            ),
+            width: interpolate(
+                colorProgress.value,
+                [0, 1],
+                [100, 200],
+                Extrapolation.CLAMP,
+            ),
+        };
     });
 
     // 练习 3：旋转动画
