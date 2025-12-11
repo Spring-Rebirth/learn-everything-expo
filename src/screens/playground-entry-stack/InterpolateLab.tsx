@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, ScrollView, Dimensions, StyleSheet, Switch } from 'react-native';
 import Animated, {
     useSharedValue,
@@ -30,12 +30,15 @@ export default function InterpolateLab() {
 
     // 1. Basic Opacity & Scale
     const progress = useSharedValue(0);
+    const [isProgressEnabled, setIsProgressEnabled] = useState(false);
 
     // 2. Color Interpolation
     const colorProgress = useSharedValue(0);
+    const [isColorEnabled, setIsColorEnabled] = useState(false);
 
     // 3. 3D Rotation
     const rotateProgress = useSharedValue(0);
+    const [isRotateEnabled, setIsRotateEnabled] = useState(false);
 
     // 4. Scroll Interpolation
     const scrollX = useSharedValue(0);
@@ -52,9 +55,38 @@ export default function InterpolateLab() {
     //    - 缩放 (scale): 1 -> 1.5
     //    - 透明度 (opacity): 0.5 -> 1
     //    - 圆角 (borderRadius): 10 -> 50
+    const scaleBox = useSharedValue(1);
+    const opacityBox = useSharedValue(0.5);
+    const borderRadiusBox = useSharedValue(10);
+
     const boxStyle = useAnimatedStyle(() => {
-        // TODO: 在这里实现你的代码
-        return {};
+
+        scaleBox.value = interpolate(
+            progress.value,
+            [0, 1],
+            [1, 1.5],
+            Extrapolation.CLAMP,
+        );
+
+        opacityBox.value = interpolate(
+            progress.value,
+            [0, 1],
+            [0.5, 1],
+            Extrapolation.CLAMP,
+        );
+
+        borderRadiusBox.value = interpolate(
+            progress.value,
+            [0, 1],
+            [10, 50],
+            Extrapolation.CLAMP,
+        );
+
+        return {
+            scale: scaleBox.value,
+            opacity: opacityBox.value,
+            borderRadius: borderRadiusBox.value
+        };
     });
 
     // 练习 2：颜色插值
@@ -101,8 +133,11 @@ export default function InterpolateLab() {
                     <View className="mt-4 flex-row items-center gap-2">
                         <Text>Toggle Effect</Text>
                         <Switch
-                            value={progress.value === 1}
-                            onValueChange={(v) => { progress.value = withSpring(v ? 1 : 0); }}
+                            value={isProgressEnabled}
+                            onValueChange={(v) => {
+                                setIsProgressEnabled(v);
+                                progress.value = withSpring(v ? 1 : 0);
+                            }}
                         />
                     </View>
                     <Text className="text-xs text-slate-400 mt-2">
@@ -118,8 +153,11 @@ export default function InterpolateLab() {
                     <View className="mt-4 flex-row items-center gap-2">
                         <Text>Change Color</Text>
                         <Switch
-                            value={colorProgress.value === 1}
-                            onValueChange={(v) => { colorProgress.value = withTiming(v ? 1 : 0); }}
+                            value={isColorEnabled}
+                            onValueChange={(v) => {
+                                setIsColorEnabled(v);
+                                colorProgress.value = withTiming(v ? 1 : 0);
+                            }}
                         />
                     </View>
                     <Text className="text-xs text-slate-400 mt-2">
@@ -137,8 +175,11 @@ export default function InterpolateLab() {
                     <View className="mt-4 flex-row items-center gap-2">
                         <Text>Spin 360</Text>
                         <Switch
-                            value={rotateProgress.value === 1}
-                            onValueChange={(v) => { rotateProgress.value = withSpring(v ? 1 : 0); }}
+                            value={isRotateEnabled}
+                            onValueChange={(v) => {
+                                setIsRotateEnabled(v);
+                                rotateProgress.value = withSpring(v ? 1 : 0);
+                            }}
                         />
                     </View>
                     <Text className="text-xs text-slate-400 mt-2">
