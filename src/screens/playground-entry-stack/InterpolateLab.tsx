@@ -206,41 +206,58 @@ export default function InterpolateLab() {
                     </Text>
                 </Section>
 
-                {/* Exercise 4: Scroll Interpolation */}
-                <Section title="4. Scroll Interpolation (Parallax)">
+                {/* Exercise 4: 3D Cover Flow */}
+                <Section title="4. 3D Cover Flow (Advanced)">
                     <Animated.ScrollView
                         horizontal
-                        pagingEnabled
+                        // 使用 snapToInterval 替代 pagingEnabled 以支持非全屏宽度的卡片居中
+                        snapToInterval={width * 0.75}
+                        decelerationRate="fast"
                         onScroll={scrollHandler}
                         scrollEventThrottle={16}
                         showsHorizontalScrollIndicator={false}
-                        className="w-full h-40"
-                        contentContainerStyle={{ alignItems: 'center' }}
+                        className="w-full py-4"
+                        // 确保第一个和最后一个卡片能居中
+                        contentContainerStyle={{
+                            alignItems: 'center',
+                            paddingHorizontal: (width - width * 0.75) / 2
+                        }}
                     >
                         {items.map((_, index) => {
-                            // TODO: 在这里实现每个卡片的动画样式
-                            // 提示：你需要根据 index 计算当前卡片的中心点位置
+                            const CARD_WIDTH = width * 0.75;
+
+                            // TODO: 实现 3D Cover Flow 效果
+                            // 1. 计算 input range: [(index - 1) * CARD_WIDTH, index * CARD_WIDTH, (index + 1) * CARD_WIDTH]
+                            // 2. 使用 interpolate 实现:
+                            //    - scale: 中间 1，两边 0.9
+                            //    - rotateY: 左边 '30deg'，中间 '0deg'，右边 '-30deg'
+                            //    - opacity: 中间 1，两边 0.8
                             const style = useAnimatedStyle(() => {
-                                return {};
+                                return {
+                                    transform: [
+                                        { perspective: 1000 },
+                                        // 在这里添加 rotateY 和 scale
+                                    ]
+                                };
                             });
 
                             return (
-                                <View key={index} style={{ width: width * 0.7, padding: 10 }}>
+                                <View key={index} style={{ width: CARD_WIDTH }}>
                                     <Animated.View
-                                        className="flex-1 bg-indigo-500 rounded-2xl items-center justify-center shadow-lg overflow-hidden"
+                                        className="mx-4 h-64 bg-indigo-500 rounded-2xl items-center justify-center shadow-xl border border-indigo-400"
                                         style={style}
                                     >
-                                        <Text className="text-white text-3xl font-bold">{index + 1}</Text>
-                                        <Animated.Text className="text-white/80 mt-2">
-                                            Card {index + 1}
+                                        <Text className="text-white text-4xl font-bold">{index + 1}</Text>
+                                        <Animated.Text className="text-indigo-100 mt-2 font-medium">
+                                            Cover Flow
                                         </Animated.Text>
                                     </Animated.View>
                                 </View>
                             );
                         })}
                     </Animated.ScrollView>
-                    <Text className="text-xs text-slate-400 mt-2 text-center">
-                        Scroll horizontally to see Scale & Opacity changes
+                    <Text className="text-xs text-slate-400 mt-4 text-center px-8">
+                        Challenge: Implement a 3D rotation effect where side cards rotate inwards like a cover flow.
                     </Text>
                 </Section>
             </ScrollView>
