@@ -234,15 +234,44 @@ export default function InterpolateLab() {
                         {items.map((_, index) => {
                             // TODO: 实现 3D Cover Flow 效果
                             // 1. 计算 input range: [(index - 1) * CARD_WIDTH, index * CARD_WIDTH, (index + 1) * CARD_WIDTH]
+                            const inputRange = [
+                                (index - 1) * CARD_WIDTH,
+                                index * CARD_WIDTH,
+                                (index + 1) * CARD_WIDTH,
+                            ];
+
                             // 2. 使用 interpolate 实现:
                             //    - scale: 中间 1，两边 0.9
                             //    - rotateY: 左边 '30deg'，中间 '0deg'，右边 '-30deg'
                             //    - opacity: 中间 1，两边 0.8
                             const style = useAnimatedStyle(() => {
+                                const scale = interpolate(
+                                    scrollX.value,
+                                    inputRange,
+                                    [0.9, 1, 0.9],
+                                    Extrapolation.CLAMP,
+                                );
+
+                                const rotateY = interpolate(
+                                    scrollX.value,
+                                    inputRange,
+                                    [30, 0, -30], // 注意方向：左边(index-1)通常需要正角度或负角度取决于视觉需求
+                                    Extrapolation.CLAMP
+                                );
+
+                                const opacity = interpolate(
+                                    scrollX.value,
+                                    inputRange,
+                                    [0.8, 1, 0.8],
+                                    Extrapolation.CLAMP
+                                );
+
                                 return {
+                                    opacity: opacity,
                                     transform: [
                                         { perspective: 1000 },
-                                        // 在这里添加 rotateY 和 scale
+                                        { scale: scale },
+                                        { rotateY: `${rotateY}deg` }
                                     ]
                                 };
                             });
