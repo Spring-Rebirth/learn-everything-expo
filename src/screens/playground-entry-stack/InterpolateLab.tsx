@@ -133,6 +133,13 @@ export default function InterpolateLab() {
     // 3. 实现中间卡片放大(scale 1)，两边卡片缩小(scale 0.8)的效果
     const items = [0, 1, 2, 3, 4];
 
+    // 修正：基于 Section 的实际可用宽度计算，而不是全屏宽度
+    // ScrollView padding: 20 * 2 = 40
+    // Section padding: 16 * 2 = 32
+    const SECTION_WIDTH = width - 40 - 32;
+    const CARD_WIDTH = SECTION_WIDTH * 0.75;
+    const CARD_SPACING = (SECTION_WIDTH - CARD_WIDTH) / 2;
+
     return (
         <View className="flex-1 bg-slate-50">
             <FloatingBackButton />
@@ -211,7 +218,7 @@ export default function InterpolateLab() {
                     <Animated.ScrollView
                         horizontal
                         // 使用 snapToInterval 替代 pagingEnabled 以支持非全屏宽度的卡片居中
-                        snapToInterval={width * 0.75}
+                        snapToInterval={CARD_WIDTH}
                         decelerationRate="fast"
                         onScroll={scrollHandler}
                         scrollEventThrottle={16}
@@ -220,12 +227,10 @@ export default function InterpolateLab() {
                         // 确保第一个和最后一个卡片能居中
                         contentContainerStyle={{
                             alignItems: 'center',
-                            paddingHorizontal: (width - width * 0.75) / 2
+                            paddingHorizontal: CARD_SPACING
                         }}
                     >
                         {items.map((_, index) => {
-                            const CARD_WIDTH = width * 0.75;
-
                             // TODO: 实现 3D Cover Flow 效果
                             // 1. 计算 input range: [(index - 1) * CARD_WIDTH, index * CARD_WIDTH, (index + 1) * CARD_WIDTH]
                             // 2. 使用 interpolate 实现:
