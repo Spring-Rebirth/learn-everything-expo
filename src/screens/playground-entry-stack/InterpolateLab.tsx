@@ -220,6 +220,7 @@ export default function InterpolateLab() {
                         // 使用 snapToInterval 替代 pagingEnabled 以支持非全屏宽度的卡片居中
                         snapToInterval={CARD_WIDTH}
                         decelerationRate="fast"
+                        disableIntervalMomentum={true}
                         onScroll={scrollHandler}
                         scrollEventThrottle={16}
                         showsHorizontalScrollIndicator={false}
