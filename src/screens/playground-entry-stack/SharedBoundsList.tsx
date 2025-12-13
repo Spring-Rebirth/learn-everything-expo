@@ -42,7 +42,6 @@ export default function SharedBoundsList({ navigation }: any) {
           >
             <AnimatedImage
               sharedTransitionTag={`image-${item.id}`}
-              sharedTransitionStyle={imageTransition}
               source={item.image}
               style={{
                 width: listImageWidth,

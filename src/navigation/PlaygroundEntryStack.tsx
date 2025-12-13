@@ -163,6 +163,7 @@ export default function PlaygroundEntryStack() {
         component={SharedBoundsDetail}
         options={{
           headerShown: false,
+          animation: 'none',
         }}
       />
       <Stack.Screen
