@@ -29,7 +29,7 @@
 		F11748412D0307B40044C1D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = learneverythingexpo/AppDelegate.swift; sourceTree = "<group>"; };
 		F11748442D0722820044C1D9 /* learneverythingexpo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "learneverythingexpo-Bridging-Header.h"; path = "learneverythingexpo/learneverythingexpo-Bridging-Header.h"; sourceTree = "<group>"; };
 		F28B125D17DDEDA222D5E5A2 /* Pods-learneverythingexpo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-learneverythingexpo.debug.xcconfig"; path = "Target Support Files/Pods-learneverythingexpo/Pods-learneverythingexpo.debug.xcconfig"; sourceTree = "<group>"; };
-		F9E554BE87CDE43858B81BE9 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = learneverythingexpo/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		F9E554BE87CDE43858B81BE9 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = learneverythingexpo/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,7 +128,6 @@
 				F28B125D17DDEDA222D5E5A2 /* Pods-learneverythingexpo.debug.xcconfig */,
 				6DC484699D482011CB34D8A1 /* Pods-learneverythingexpo.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -355,7 +354,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = learneverythingexpo/learneverythingexpo.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = XFLX2PQSF5;
+				DEVELOPMENT_TEAM = KF6AP3VP77;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
@@ -392,7 +391,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = learneverythingexpo/learneverythingexpo.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = XFLX2PQSF5;
+				DEVELOPMENT_TEAM = KF6AP3VP77;
 				INFOPLIST_FILE = learneverythingexpo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
