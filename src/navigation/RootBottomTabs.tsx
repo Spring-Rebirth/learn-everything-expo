@@ -1,8 +1,8 @@
-import { createNativeBottomTabNavigator } from '@bottom-tabs/react-navigation';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from '../screens/root-tabs/Home';
 import PlaygroundScreen from '../screens/root-tabs/Playground';
 import NoticeScreen from '../screens/root-tabs/Notice';
-import { Platform } from 'react-native';
+import { Image, Platform } from 'react-native';
 
 export type RootBottomTabsParamList = {
   Home: undefined;
@@ -10,26 +10,28 @@ export type RootBottomTabsParamList = {
   Notice: undefined;
 };
 
-const BottomTab = createNativeBottomTabNavigator<RootBottomTabsParamList>();
+const BottomTab = createBottomTabNavigator<RootBottomTabsParamList>();
 
 export default function RootBottomTabs() {
   return (
     <BottomTab.Navigator
-      tabBarActiveTintColor="#fb7185"
-      tabBarInactiveTintColor="#8E8E93"
       screenOptions={{
+        tabBarActiveTintColor: '#fb7185',
+        tabBarInactiveTintColor: '#8E8E93',
         freezeOnBlur: true,
+        headerShown: false,
       }}
     >
       <BottomTab.Screen
         name="Home"
         component={HomeScreen}
         options={{
-          tabBarIcon: ({ focused }) => Platform.select({
-            ios: { sfSymbol: focused ? 'house.fill' : 'house' },
-            android: require('../assets/icons/home.png'),
-            default: require('../assets/icons/home.png'),
-          }),
+          tabBarIcon: ({ color, size }) => (
+            <Image
+              source={require('../assets/icons/home.png')}
+              style={{ width: size, height: size, tintColor: color }}
+            />
+          ),
           title: 'Home',
         }}
       />
@@ -37,11 +39,12 @@ export default function RootBottomTabs() {
         name="Playground"
         component={PlaygroundScreen}
         options={{
-          tabBarIcon: ({ focused }) => Platform.select({
-            ios: { sfSymbol: focused ? 'play.fill' : 'play' },
-            android: require('../assets/icons/play.png'),
-            default: require('../assets/icons/play.png'),
-          }),
+          tabBarIcon: ({ color, size }) => (
+            <Image
+              source={require('../assets/icons/play.png')}
+              style={{ width: size, height: size, tintColor: color }}
+            />
+          ),
           title: 'Playground',
         }}
       />
@@ -49,11 +52,12 @@ export default function RootBottomTabs() {
         name="Notice"
         component={NoticeScreen}
         options={{
-          tabBarIcon: ({ focused }) => Platform.select({
-            ios: { sfSymbol: focused ? 'bell.fill' : 'bell' },
-            android: require('../assets/icons/bell.png'),
-            default: require('../assets/icons/bell.png'),
-          }),
+          tabBarIcon: ({ color, size }) => (
+            <Image
+              source={require('../assets/icons/bell.png')}
+              style={{ width: size, height: size, tintColor: color }}
+            />
+          ),
           title: 'Notice',
         }}
       />
