@@ -12,12 +12,6 @@ export type RootBottomTabsParamList = {
 
 const BottomTab = createNativeBottomTabNavigator<RootBottomTabsParamList>();
 
-const icons = {
-  home: require('../assets/icons/home.png'),
-  play: require('../assets/icons/play.png'),
-  notice: require('../assets/icons/bell.png'),
-};
-
 export default function RootBottomTabs() {
   return (
     <BottomTab.Navigator
@@ -33,8 +27,8 @@ export default function RootBottomTabs() {
         options={{
           tabBarIcon: ({ focused }) => Platform.select({
             ios: { sfSymbol: focused ? 'house.fill' : 'house' },
-            android: icons.home,
-            default: icons.home,
+            android: require('../assets/icons/home.png'),
+            default: require('../assets/icons/home.png'),
           }),
           title: 'Home',
         }}
@@ -45,8 +39,8 @@ export default function RootBottomTabs() {
         options={{
           tabBarIcon: ({ focused }) => Platform.select({
             ios: { sfSymbol: focused ? 'play.fill' : 'play' },
-            android: icons.play,
-            default: icons.play,
+            android: require('../assets/icons/play.png'),
+            default: require('../assets/icons/play.png'),
           }),
           title: 'Playground',
         }}
@@ -57,8 +51,8 @@ export default function RootBottomTabs() {
         options={{
           tabBarIcon: ({ focused }) => Platform.select({
             ios: { sfSymbol: focused ? 'bell.fill' : 'bell' },
-            android: icons.notice,
-            default: icons.notice,
+            android: require('../assets/icons/bell.png'),
+            default: require('../assets/icons/bell.png'),
           }),
           title: 'Notice',
         }}
