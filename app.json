@@ -48,8 +48,7 @@
               "RNFBAuth",
               "RNFBCrashlytics",
               "RNFBFirestore",
-              "RNFBStorage",
-              "react-native-bottom-tabs"
+              "RNFBStorage"
             ]
           }
         }

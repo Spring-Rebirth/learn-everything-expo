@@ -4,6 +4,6 @@
   "newArchEnabled": "true",
   "ios.deploymentTarget": "15.1",
   "ios.useFrameworks": "static",
-  "ios.forceStaticLinking": "[\"RNFBApp\",\"RNFBAuth\",\"RNFBCrashlytics\",\"RNFBFirestore\",\"RNFBStorage\",\"react-native-bottom-tabs\"]",
+  "ios.forceStaticLinking": "[\"RNFBApp\",\"RNFBAuth\",\"RNFBCrashlytics\",\"RNFBFirestore\",\"RNFBStorage\"]",
   "apple.privacyManifestAggregationEnabled": "true"
 }
