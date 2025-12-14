@@ -5,11 +5,11 @@ import Animated, {
   useSharedValue,
   useAnimatedStyle,
   withSpring,
-  runOnJS,
   interpolate,
   Extrapolation,
   withTiming,
 } from "react-native-reanimated";
+import { scheduleOnRN } from 'react-native-worklets'
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import { imageAssets } from "../../constant/imageAssets";
 
@@ -61,7 +61,7 @@ export default function SharedBoundsDetail({ route, navigation }: any) {
     .onEnd((event) => {
       if (event.translationY > DISMISS_THRESHOLD) {
         // 超过阈值，关闭页面
-        runOnJS(goBack)();
+        scheduleOnRN(goBack);
       } else {
         // 未超过阈值，弹回原位
         translateY.value = withTiming(0, { duration: 300 });
