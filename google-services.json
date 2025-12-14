@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "283003341708",
+    "project_id": "learn-everything-expo",
+    "storage_bucket": "learn-everything-expo.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:283003341708:android:382ed3a8c23dc059b3a4a9",
+        "android_client_info": {
+          "package_name": "com.learneverythingexpo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7o2fRExINIsuA96yftDCO0yEBsH_GvL4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
