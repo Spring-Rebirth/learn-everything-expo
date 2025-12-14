@@ -12,7 +12,7 @@ import {
 import { launchImageLibrary } from 'react-native-image-picker';
 import storage from '@react-native-firebase/storage';
 
-export default function UploadScreen() {
+export default function LabsScreen() {
   // 状态管理
   const [imageUri, setImageUri] = useState<string | null>(null); // 本地图片路径
   const [uploading, setUploading] = useState(false); // 是否正在上传
@@ -43,9 +43,10 @@ export default function UploadScreen() {
   const uploadImage = async () => {
     if (!imageUri) return;
 
-    // 获取文件名 (为了防止重名覆盖，建议加上时间戳)
-    // 逻辑：取出路径最后的部分作为文件名
-    const filename = imageUri.substring(imageUri.lastIndexOf('/') + 1);
+    // 获取文件名 (为了防止重名覆盖，加上时间戳)
+    // 取出路径最后的部分拼接时间戳作为文件名
+    const timestamp = Date.now();
+    const filename = `${imageUri.substring(imageUri.lastIndexOf('/') + 1)}_${timestamp}`;
 
     // 设置是否正在上传的状态
     setUploading(true);

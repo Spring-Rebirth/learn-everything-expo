@@ -1,13 +1,13 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from '../screens/root-tabs/Home';
 import PlaygroundScreen from '../screens/root-tabs/Playground';
-import NoticeScreen from '../screens/root-tabs/Notice';
+import LabsScreen from '../screens/root-tabs/Labs';
 import { Image, Platform } from 'react-native';
 
 export type RootBottomTabsParamList = {
   Home: undefined;
   Playground: undefined;
-  Notice: undefined;
+  Labs: undefined;
 };
 
 const BottomTab = createBottomTabNavigator<RootBottomTabsParamList>();
@@ -49,16 +49,16 @@ export default function RootBottomTabs() {
         }}
       />
       <BottomTab.Screen
-        name="Notice"
-        component={NoticeScreen}
+        name="Labs"
+        component={LabsScreen}
         options={{
           tabBarIcon: ({ color, size }) => (
             <Image
-              source={require('../assets/icons/bell.png')}
+              source={require('../assets/icons/labs.png')}
               style={{ width: size, height: size, tintColor: color }}
             />
           ),
-          title: 'Notice',
+          title: 'Labs',
         }}
       />
     </BottomTab.Navigator>
