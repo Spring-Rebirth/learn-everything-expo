@@ -110,7 +110,13 @@ export default function Home() {
             { title: 'New Notification', time: '2 hours ago', icon: 'bell', color: '#3b82f6' },
             { title: 'System Update', time: 'Yesterday', icon: 'rotate', color: '#8b5cf6' }
           ].map((item, index, arr) => (
-            <Pressable key={index} className={`flex-row items-center p-3 ${index !== arr.length - 1 ? 'border-b border-slate-100 dark:border-slate-700' : ''}`}>
+            <Pressable
+              key={index}
+              className={`flex-row items-center p-3 ${index !== arr.length - 1
+                ? `border-b ${isDark ? 'border-slate-700' : 'border-slate-100'}`
+                : ''
+                }`}
+            >
               <View className={`w-10 h-10 rounded-full items-center justify-center mr-3`} style={{ backgroundColor: iconContainerBg(item.color) }}>
                 <FontAwesome6 name={item.icon} size={16} color={item.color} solid />
               </View>
