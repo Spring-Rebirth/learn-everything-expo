@@ -69,8 +69,8 @@ export default function Home() {
             <View className="bg-white/20 self-start px-3 py-1 rounded-full backdrop-blur-md mb-2">
               <Text className="text-white text-xs font-bold uppercase tracking-wider">Featured</Text>
             </View>
-            <Text className="text-white text-3xl font-bold shadow-sm">Discover Nature</Text>
-            <Text className="text-white/90 text-base mt-1 shadow-sm">Find peace in the wild.</Text>
+            <Text className="text-white text-3xl font-bold">Discover Nature</Text>
+            <Text className="text-white/90 text-base mt-1">Find peace in the wild.</Text>
           </View>
         </View>
 
