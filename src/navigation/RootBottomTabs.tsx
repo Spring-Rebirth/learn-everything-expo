@@ -1,13 +1,13 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import HomeScreen from '../screens/root-tabs/Home';
-import PlaygroundScreen from '../screens/root-tabs/Playground';
-import LabsScreen from '../screens/root-tabs/Labs';
-import { Image, Platform } from 'react-native';
+import TodosScreen from '../screens/root-tabs/Todos';
+import HabitsScreen from '../screens/root-tabs/Habits';
+import SettingsScreen from '../screens/root-tabs/Settings';
+import { Image } from 'react-native';
 
 export type RootBottomTabsParamList = {
-  Home: undefined;
-  Playground: undefined;
-  Labs: undefined;
+  Todos: undefined;
+  Habits: undefined;
+  Settings: undefined;
 };
 
 const BottomTab = createBottomTabNavigator<RootBottomTabsParamList>();
@@ -23,8 +23,8 @@ export default function RootBottomTabs() {
       }}
     >
       <BottomTab.Screen
-        name="Home"
-        component={HomeScreen}
+        name="Todos"
+        component={TodosScreen}
         options={{
           tabBarIcon: ({ color, size }) => (
             <Image
@@ -32,12 +32,12 @@ export default function RootBottomTabs() {
               style={{ width: size, height: size, tintColor: color }}
             />
           ),
-          title: 'Home',
+          title: '待办',
         }}
       />
       <BottomTab.Screen
-        name="Playground"
-        component={PlaygroundScreen}
+        name="Habits"
+        component={HabitsScreen}
         options={{
           tabBarIcon: ({ color, size }) => (
             <Image
@@ -45,12 +45,12 @@ export default function RootBottomTabs() {
               style={{ width: size, height: size, tintColor: color }}
             />
           ),
-          title: 'Playground',
+          title: '习惯',
         }}
       />
       <BottomTab.Screen
-        name="Labs"
-        component={LabsScreen}
+        name="Settings"
+        component={SettingsScreen}
         options={{
           tabBarIcon: ({ color, size }) => (
             <Image
@@ -58,9 +58,10 @@ export default function RootBottomTabs() {
               style={{ width: size, height: size, tintColor: color }}
             />
           ),
-          title: 'Labs',
+          title: '设置',
         }}
       />
     </BottomTab.Navigator>
   );
 }
+

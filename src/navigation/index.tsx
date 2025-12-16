@@ -3,7 +3,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Onboarding from '../screens/get-started/Onboarding';
 import { StatusBar } from 'expo-status-bar';
 import RootBottomTabs, { type RootBottomTabsParamList } from './RootBottomTabs';
-import PlaygroundEntryStack, { type PlaygroundEntryStackParamList } from './PlaygroundEntryStack';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import * as Linking from 'expo-linking';
 import { useThemeContext } from '../providers/ThemeProvider';
@@ -13,9 +12,6 @@ export type RootStackParamList = {
   Onboarding: undefined;
   RootBottomTabs: {
     screen: keyof RootBottomTabsParamList;
-  };
-  PlaygroundEntryStack: {
-    screen: keyof PlaygroundEntryStackParamList;
   };
 };
 
@@ -29,22 +25,9 @@ const linking: LinkingOptions<RootStackParamList> = {
       RootBottomTabs: {
         path: 'tabs',
         screens: {
-          Home: 'home',
-          Playground: 'playground',
-          Labs: 'labs',
-        },
-      },
-      PlaygroundEntryStack: {
-        path: 'lab',
-        screens: {
-          ManualGestures: 'manual-gestures',
-          DraggableSortingGrid: 'draggable-grid',
-          SharedTransitionStack: 'shared-transition',
-          TinderSwipe: 'tinder-swipe',
-          ParallaxProfile: 'parallax-profile',
-          NotificationsLab: 'notifications',
-          CameraLab: 'camera',
-          BottomSheetLab: 'bottom-sheet',
+          Todos: 'todos',
+          Habits: 'habits',
+          Settings: 'settings',
         },
       },
     },
@@ -53,11 +36,6 @@ const linking: LinkingOptions<RootStackParamList> = {
 
 const RootStack = () => {
   const hasCompletedOnboarding = usePreferencesStore((state) => state.hasCompletedOnboarding);
-  const hydrated = usePreferencesStore((state) => state.hydrated);
-
-  if (!hydrated) {
-    return null;
-  }
 
   return (
     <Stack.Navigator
@@ -65,7 +43,6 @@ const RootStack = () => {
     >
       <Stack.Screen name="Onboarding" component={Onboarding} options={{ headerShown: false }} />
       <Stack.Screen name="RootBottomTabs" component={RootBottomTabs} options={{ headerShown: false }} />
-      <Stack.Screen name="PlaygroundEntryStack" component={PlaygroundEntryStack} options={{ headerShown: false }} />
     </Stack.Navigator>
   )
 }
@@ -83,3 +60,4 @@ export const Navigation = () => {
     </GestureHandlerRootView>
   )
 }
+

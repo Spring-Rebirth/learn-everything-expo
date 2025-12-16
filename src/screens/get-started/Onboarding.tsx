@@ -48,7 +48,7 @@ export default function Onboarding() {
                     if (currentPage === 2) {
                         setHasCompletedOnboarding(true);
                         navigation.dispatch(
-                            StackActions.replace('RootBottomTabs', { screen: 'Home' })
+                            StackActions.replace('RootBottomTabs', { screen: 'Todos' })
                         );
                     } else {
                         pagerRef.current?.setPage(currentPage + 1);
