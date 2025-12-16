@@ -1,10 +1,8 @@
 import { View, Text, Image, Pressable, Dimensions, StyleSheet } from "react-native";
 import Animated, {
   FadeIn,
-  SharedTransition,
   useSharedValue,
   useAnimatedStyle,
-  withSpring,
   interpolate,
   Extrapolation,
   withTiming,
@@ -12,6 +10,7 @@ import Animated, {
 import { scheduleOnRN } from 'react-native-worklets'
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import { imageAssets } from "../../constant/imageAssets";
+import { FontAwesome6 } from "@expo/vector-icons";
 
 const imagesMap: Record<string, any> = {
   a: imageAssets.nature1,
@@ -28,7 +27,7 @@ const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 // 拖动关闭的阈值
 const DISMISS_THRESHOLD = 150;
 
-export default function SharedBoundsDetail({ route, navigation }: any) {
+export default function SharedTransitionDetail({ route, navigation }: any) {
   const { id } = route.params;
   const image = imagesMap[id] ?? imageAssets.nature1;
   const detailImageHeight = SCREEN_WIDTH * 0.66;
@@ -122,7 +121,7 @@ export default function SharedBoundsDetail({ route, navigation }: any) {
               entering={FadeIn.delay(250).duration(300)}
               style={{
                 position: 'absolute',
-                top: 56,
+                top: 40,
                 left: 16,
                 zIndex: 10,
               }}
@@ -136,7 +135,7 @@ export default function SharedBoundsDetail({ route, navigation }: any) {
                 }}
                 onPress={goBack}
               >
-                <Text style={{ color: 'white', fontWeight: '500' }}>Back</Text>
+                <FontAwesome6 name="arrow-left" size={20} color="white" />
               </Pressable>
             </Animated.View>
           </View>

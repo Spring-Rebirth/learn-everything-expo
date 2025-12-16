@@ -43,4 +43,3 @@ export const usePreferencesStore = create<PreferencesState>()(
     },
   ),
 );
-

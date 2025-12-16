@@ -4,6 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../navigation";
 import { PlaygroundEntryStackParamList } from "../../navigation/PlaygroundEntryStack";
+import { SharedTransitionStackParamList } from "../../navigation/SharedTransitionStack";
 import { FontAwesome6 } from '@expo/vector-icons';
 import { BlurView } from 'expo-blur';
 import { useThemeContext } from "../../providers/ThemeProvider";
@@ -12,6 +13,7 @@ type PageItem = {
   id: string;
   name: string;
   destination: keyof PlaygroundEntryStackParamList;
+  params?: PlaygroundEntryStackParamList[keyof PlaygroundEntryStackParamList];
   icon?: string;
   color?: string;
 };
@@ -87,8 +89,11 @@ export default function Playground() {
     },
     {
       id: '2',
-      name: 'Shared Bounds',
-      destination: 'SharedBoundsList',
+      name: 'Shared Transition',
+      destination: 'SharedTransitionStack',
+      params: {
+        screen: 'SharedTransitionList',
+      },
       icon: 'maximize',
       color: '#06b6d4'
     },
@@ -160,7 +165,8 @@ export default function Playground() {
             <Pressable
               key={page.id}
               onPress={() => navigation.navigate('PlaygroundEntryStack', {
-                screen: page.destination
+                screen: page.destination,
+                ...(page.params ? { params: page.params } : {}),
               })}
               className={`w-[48%] mb-4 p-4 rounded-2xl ${cardBgClass} border ${borderClass} items-center justify-center`}
               style={{

@@ -15,7 +15,7 @@ const items = [
 const AnimatedImage = Animated.createAnimatedComponent(Image);
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
-export default function SharedBoundsList({ navigation }: any) {
+export default function SharedTransitionList({ navigation }: any) {
   const listImageWidth = SCREEN_WIDTH - 32; // px-4 = 16px * 2
   const listImageHeight = 192; // h-48 = 192px
 
@@ -39,7 +39,7 @@ export default function SharedBoundsList({ navigation }: any) {
             <Pressable
               key={item.id}
               onPress={() => navigation.navigate(
-                'SharedBoundsDetail',
+                'SharedTransitionDetail',
                 { id: item.id },
               )}
             >

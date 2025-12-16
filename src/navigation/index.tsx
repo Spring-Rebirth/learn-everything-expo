@@ -39,8 +39,7 @@ const linking: LinkingOptions<RootStackParamList> = {
         screens: {
           ManualGestures: 'manual-gestures',
           DraggableSortingGrid: 'draggable-grid',
-          SharedBoundsList: 'shared-bounds',
-          SharedBoundsDetail: 'shared-bounds/:id',
+          SharedTransitionStack: 'shared-transition',
           TinderSwipe: 'tinder-swipe',
           ParallaxProfile: 'parallax-profile',
           NotificationsLab: 'notifications',
