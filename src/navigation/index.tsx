@@ -7,6 +7,7 @@ import PlaygroundEntryStack, { type PlaygroundEntryStackParamList } from './Play
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import * as Linking from 'expo-linking';
 import { useThemeContext } from '../providers/ThemeProvider';
+import { usePreferencesStore } from '../store/usePreferencesStore';
 
 export type RootStackParamList = {
   Onboarding: undefined;
@@ -52,8 +53,17 @@ const linking: LinkingOptions<RootStackParamList> = {
 };
 
 const RootStack = () => {
+  const hasCompletedOnboarding = usePreferencesStore((state) => state.hasCompletedOnboarding);
+  const hydrated = usePreferencesStore((state) => state.hydrated);
+
+  if (!hydrated) {
+    return null;
+  }
+
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      initialRouteName={hasCompletedOnboarding ? 'RootBottomTabs' : 'Onboarding'}
+    >
       <Stack.Screen name="Onboarding" component={Onboarding} options={{ headerShown: false }} />
       <Stack.Screen name="RootBottomTabs" component={RootBottomTabs} options={{ headerShown: false }} />
       <Stack.Screen name="PlaygroundEntryStack" component={PlaygroundEntryStack} options={{ headerShown: false }} />

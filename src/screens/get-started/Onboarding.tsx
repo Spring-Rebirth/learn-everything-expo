@@ -7,12 +7,14 @@ import { useRef, useState } from 'react';
 import { useNavigation, NavigationProp, StackActions } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { RootStackParamList } from '../../navigation/index';
+import { usePreferencesStore } from '../../store/usePreferencesStore';
 
 export default function Onboarding() {
     const insets = useSafeAreaInsets();
     const navigation = useNavigation<NavigationProp<RootStackParamList>>();
     const pagerRef = useRef<PagerView>(null);
     const [currentPage, setCurrentPage] = useState(0);
+    const setHasCompletedOnboarding = usePreferencesStore((state) => state.setHasCompletedOnboarding);
 
     return (
         <View className="flex-1">
@@ -44,6 +46,7 @@ export default function Onboarding() {
                 style={{ marginBottom: insets.bottom }}
                 onPress={() => {
                     if (currentPage === 2) {
+                        setHasCompletedOnboarding(true);
                         navigation.dispatch(
                             StackActions.replace('RootBottomTabs', { screen: 'Home' })
                         );
