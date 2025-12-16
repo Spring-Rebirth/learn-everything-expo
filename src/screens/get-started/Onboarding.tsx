@@ -4,7 +4,7 @@ import { Onboarding2 } from '../../components/Onboarding2';
 import { Onboarding3 } from '../../components/Onboarding3';
 import { Pressable, Text, View } from 'react-native';
 import { useRef, useState } from 'react';
-import { useNavigation, NavigationProp } from '@react-navigation/native';
+import { useNavigation, NavigationProp, StackActions } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { RootStackParamList } from '../../navigation/index';
 
@@ -44,9 +44,9 @@ export default function Onboarding() {
                 style={{ marginBottom: insets.bottom }}
                 onPress={() => {
                     if (currentPage === 2) {
-                        navigation.navigate('RootBottomTabs', {
-                            screen: 'Home',
-                        });
+                        navigation.dispatch(
+                            StackActions.replace('RootBottomTabs', { screen: 'Home' })
+                        );
                     } else {
                         pagerRef.current?.setPage(currentPage + 1);
                     }
