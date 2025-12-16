@@ -28,13 +28,6 @@ const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 // 拖动关闭的阈值
 const DISMISS_THRESHOLD = 150;
 
-// 图片使用弹性过渡动画（与列表页保持一致）
-const imageTransition = SharedTransition
-  .springify()
-  .damping(18)
-  .stiffness(120)
-  .mass(0.8);
-
 export default function SharedBoundsDetail({ route, navigation }: any) {
   const { id } = route.params;
   const image = imagesMap[id] ?? imageAssets.nature1;
