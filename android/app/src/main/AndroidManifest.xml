@@ -31,7 +31,6 @@
         <category android:name="android.intent.category.DEFAULT"/>
         <category android:name="android.intent.category.BROWSABLE"/>
         <data android:scheme="learneverythingexpo"/>
-        <data android:scheme="exp+learn-everything-expo"/>
       </intent-filter>
     </activity>
   </application>
