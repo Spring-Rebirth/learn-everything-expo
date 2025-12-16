@@ -30,7 +30,7 @@ const linking: LinkingOptions<RootStackParamList> = {
         screens: {
           Home: 'home',
           Playground: 'playground',
-          Notice: 'notice',
+          Labs: 'labs',
         },
       },
       PlaygroundEntryStack: {
