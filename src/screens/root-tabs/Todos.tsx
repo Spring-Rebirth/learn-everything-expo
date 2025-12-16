@@ -5,7 +5,6 @@ import {
   FlatList,
   Pressable,
   TextInput,
-  Modal,
   KeyboardAvoidingView,
   Platform,
 } from 'react-native';
@@ -251,16 +250,11 @@ export default function TodosScreen() {
         <FontAwesome6 name="plus" size={20} color="#FFFFFF" />
       </Pressable>
 
-      {/* Edit / New Modal */}
-      <Modal
-        visible={modalVisible}
-        transparent
-        animationType="slide"
-        onRequestClose={closeModal}
-      >
+      {/* Edit / New Modal（使用条件渲染代替原生 Modal，避免某些平台上 Modal 为 undefined） */}
+      {modalVisible && (
         <KeyboardAvoidingView
           behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-          style={{ flex: 1, justifyContent: 'flex-end' }}
+          style={{ position: 'absolute', left: 0, right: 0, top: 0, bottom: 0, justifyContent: 'flex-end' }}
         >
           <Pressable
             className="flex-1 bg-black/30"
@@ -321,7 +315,7 @@ export default function TodosScreen() {
             </View>
           </View>
         </KeyboardAvoidingView>
-      </Modal>
+      )}
     </View>
   );
 }
