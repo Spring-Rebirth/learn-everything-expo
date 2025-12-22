@@ -14,3 +14,9 @@ declare module '*.svg' {
   const content: React.FC<SvgProps>;
   export default content;
 }
+
+declare module '*/SharedTransitionDetail' {
+  import React from 'react';
+  const SharedTransitionDetail: React.ComponentType<any>;
+  export default SharedTransitionDetail;
+}
